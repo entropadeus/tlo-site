@@ -62,16 +62,16 @@
             --font-weight-bold: 700;
             
             /* Fluid Typography Scale */
-            --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
-            --text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
-            --text-base: clamp(1rem, 0.9rem + 0.4vw, 1.125rem);
-            --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
-            --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
-            --text-2xl: clamp(1.5rem, 1.3rem + 0.8vw, 1.875rem);
-            --text-3xl: clamp(1.875rem, 1.6rem + 1vw, 2.25rem);
-            --text-4xl: clamp(2.25rem, 2rem + 1.2vw, 3rem);
-            --text-5xl: clamp(3rem, 2.5rem + 2vw, 4rem);
-            --text-6xl: clamp(4rem, 3.5rem + 2.5vw, 5rem);
+            --text-xs: clamp(0.75rem, 0.7rem + 0.15vw, 0.875rem);
+            --text-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+            --text-base: clamp(1rem, 0.95rem + 0.35vw, 1.125rem);
+            --text-lg: clamp(1.125rem, 1.05rem + 0.45vw, 1.25rem);
+            --text-xl: clamp(1.25rem, 1.15rem + 0.65vw, 1.5rem);
+            --text-2xl: clamp(1.5rem, 1.35rem + 0.85vw, 1.875rem);
+            --text-3xl: clamp(1.875rem, 1.65rem + 1.25vw, 2.5rem);
+            --text-4xl: clamp(2.5rem, 2.15rem + 1.85vw, 3.5rem);
+            --text-5xl: clamp(3.5rem, 3rem + 2.75vw, 5rem);
+            --text-6xl: clamp(5rem, 4.25rem + 4.15vw, 7.5rem);
             
             /* Spacing Scale */
             --spacing-xs: 0.25rem;
@@ -919,7 +919,7 @@
                 <li><a href="../index.html#about" class="nav-link">About Stephen</a></li>
                 <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
                 <li><a href="../index.html#testimonials" class="nav-link">Reviews</a></li>
-                <li><a href="../index.html#contact" class="nav-cta">Consultation</a></li>
+                <li><a href="../index.html#contact" class="nav-cta">Schedule Consultation</a></li>
             </ul>
         </nav>
     </header>
@@ -956,7 +956,12 @@
                     </ul>
                 </div>
                 <div class="content-image">
-                    <img src="../images/Couple in nursing home.jpg" alt="Elderly couple in nursing home">
+                    <img src="../images/Couple in nursing home.jpg" alt="Elderly couple in nursing home" 
+                         loading="lazy" decoding="async"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display: none;">
+                        <i class="fas fa-user-md"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -967,7 +972,12 @@
         <div class="container">
             <div class="content-grid">
                 <div class="content-image">
-                    <img src="../images/Bigstock_325393900 NH hall.jpg" alt="Nursing home hallway">
+                    <img src="../images/Bigstock_325393900 NH hall.jpg" alt="Nursing home hallway" 
+                         loading="lazy" decoding="async"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display: none;">
+                        <i class="fas fa-hospital"></i>
+                    </div>
                 </div>
                 <div class="content-text">
                     <h3>Long-Term Care Planning</h3>
@@ -1002,7 +1012,12 @@
                     </ul>
                 </div>
                 <div class="content-image">
-                    <img src="../images/Bigstock_332965609 concerned couple.jpg" alt="Concerned elderly couple">
+                    <img src="../images/Bigstock_332965609 concerned couple.jpg" alt="Concerned elderly couple" 
+                         loading="lazy" decoding="async"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display: none;">
+                        <i class="fas fa-users"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1013,7 +1028,12 @@
         <div class="container">
             <div class="content-grid">
                 <div class="content-image">
-                    <img src="../images/grandparents5.jpg" alt="Elderly person with family">
+                    <img src="../images/grandparents5.jpg" alt="Elderly person with family" 
+                         loading="lazy" decoding="async"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display: none;">
+                        <i class="fas fa-heart"></i>
+                    </div>
                 </div>
                 <div class="content-text">
                     <h3>Guardianship & Alternatives</h3>
@@ -1048,7 +1068,12 @@
                     </ul>
                 </div>
                 <div class="content-image">
-                    <img src="../images/Bigstock_11536319 Nursing home.jpg" alt="Veteran in nursing home">
+                    <img src="../images/Bigstock_11536319 Nursing home.jpg" alt="Veteran in nursing home" 
+                         loading="lazy" decoding="async"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-icon" style="display: none;">
+                        <i class="fas fa-flag-usa"></i>
+                    </div>
                 </div>
             </div>
         </div>
