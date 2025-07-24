@@ -6,7 +6,8 @@
       "Bash(dir:*)",
       "Bash(ls:*)",
       "Bash(find:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
