@@ -2925,23 +2925,49 @@
 
         .form-checkbox {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            justify-content: center;
-            margin: 1rem 0;
+            align-items: flex-start;
+            gap: 1rem;
+            justify-content: flex-start;
+            margin: 1.5rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .form-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
             accent-color: var(--warm);
             cursor: pointer;
+            margin-top: 2px;
+            border-radius: 4px;
         }
 
         .form-checkbox label {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            line-height: 1.6;
             cursor: pointer;
+            font-weight: 400;
+            text-align: left;
+            flex: 1;
+            transition: color 0.2s ease;
+        }
+
+        .form-checkbox:hover label {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .form-checkbox input[type="checkbox"]:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+            outline-offset: 2px;
+        }
+
+        .form-checkbox input[type="checkbox"]:checked {
+            transform: scale(1.05);
+            transition: transform 0.1s ease;
         }
 
         #submitBtn:disabled {
@@ -3159,10 +3185,10 @@
         @media (max-width: 768px) {
             :root {
                 /* Adjust typography scale for mobile */
-                --text-5xl: clamp(2.5rem, 4vw, 3.5rem);
-                --text-4xl: clamp(2rem, 3vw, 2.5rem);
-                --text-3xl: clamp(1.5rem, 2.5vw, 2rem);
-                --text-2xl: clamp(1.25rem, 2vw, 1.5rem);
+                --text-5xl: clamp(2rem, 3vw, 3rem);
+                --text-4xl: clamp(1.75rem, 2.5vw, 2.25rem);
+                --text-3xl: clamp(1.5rem, 2vw, 1.875rem);
+                --text-2xl: clamp(1.25rem, 1.8vw, 1.5rem);
             }
 
             .header {
@@ -3623,6 +3649,23 @@
             .footer-contact-item {
                 font-size: 0.95rem;
             }
+
+            .form-checkbox {
+                gap: 0.75rem;
+                padding: 0 0.25rem;
+            }
+
+            .form-checkbox input[type="checkbox"] {
+                width: 26px;
+                height: 26px;
+                min-width: 26px;
+                min-height: 26px;
+            }
+
+            .form-checkbox label {
+                font-size: 0.95rem;
+                line-height: 1.45;
+            }
         }
 
         /* Contact Form Mobile Styles */
@@ -3658,6 +3701,27 @@
             .contact-section p {
                 font-size: 1.1rem;
                 margin-bottom: 2rem;
+            }
+
+            .form-checkbox {
+                margin: 2rem 0;
+                gap: 0.875rem;
+                max-width: 100%;
+                padding: 0 0.5rem;
+            }
+
+            .form-checkbox input[type="checkbox"] {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+                min-height: 28px;
+                margin-top: 1px;
+            }
+
+            .form-checkbox label {
+                font-size: 1rem;
+                line-height: 1.5;
+                font-weight: 400;
             }
         }
         
@@ -4140,7 +4204,7 @@
                 
                 <div class="form-checkbox">
                     <input type="checkbox" id="agreement" name="agreement" required>
-                    <label for="agreement">TBD</label>
+                    <label for="agreement">By checking this box, I understand that this message does not constitute legal advice and does not create an attorney-client relationship with Turkett Law Office.</label>
                 </div>
                 
                 <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Send Message</button>
