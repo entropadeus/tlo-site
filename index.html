@@ -441,8 +441,8 @@
 
         body {
             font-family: var(--font-body);
-            font-weight: var(--font-weight-bold);
-            line-height: 1.7;
+            font-weight: 400;
+            line-height: 1.6;
             color: var(--neutral-dark);
             background-color: var(--bg-cream);
             overflow-x: hidden;
@@ -487,8 +487,8 @@
 
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-heading);
-            font-weight: var(--font-weight-bold);
-            line-height: var(--leading-tight);
+            font-weight: 600;
+            line-height: var(--leading-snug);
             color: var(--neutral-dark);
             margin-bottom: 1.5rem;
             font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0, 'dlig' 1;
@@ -499,10 +499,10 @@
 
         h1 {
             font-size: var(--text-5xl);
-            font-weight: 300;
-            letter-spacing: var(--tracking-tighter);
-            line-height: var(--leading-tight);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            font-weight: 400;
+            letter-spacing: var(--tracking-tight);
+            line-height: var(--leading-snug);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
         }
 
         h2 {
@@ -546,15 +546,16 @@
             line-height: var(--leading-relaxed);
             margin-bottom: 1.5rem;
             color: var(--neutral-mid);
+            font-weight: 400;
             font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0;
             text-rendering: optimizeLegibility;
         }
 
         .lead {
             font-size: var(--text-xl);
-            font-weight: 300;
-            line-height: var(--leading-loose);
-            letter-spacing: var(--tracking-wide);
+            font-weight: 400;
+            line-height: var(--leading-relaxed);
+            letter-spacing: var(--tracking-normal);
             color: var(--neutral-mid);
             opacity: 0.9;
         }
@@ -996,10 +997,10 @@
 
         .floating-cta:hover {
             background: rgba(212, 154, 53, 0.95);
-            transform: translateY(-3px) scale(1.05);
+            transform: translateY(-2px);
             box-shadow: 
-                0 18px 45px rgba(229, 172, 72, 0.5),
-                inset 0 4px 18px rgba(255, 255, 255, 0.4);
+                0 8px 25px rgba(229, 172, 72, 0.3),
+                inset 0 2px 12px rgba(255, 255, 255, 0.3);
         }
 
         .floating-cta::before {
@@ -1019,13 +1020,9 @@
 
         .floating-cta .icon {
             margin-right: 0.5rem;
-            animation: pulse 2s infinite;
+            transition: transform 0.2s ease;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
 
         @media (max-width: 768px) {
             .floating-cta {
@@ -1070,26 +1067,7 @@
             }
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            33% {
-                transform: translateY(-8px) rotate(1deg);
-            }
-            66% {
-                transform: translateY(4px) rotate(-0.5deg);
-            }
-        }
 
-        @keyframes shimmer {
-            0% {
-                background-position: -200% 0;
-            }
-            100% {
-                background-position: 200% 0;
-            }
-        }
 
         @keyframes pulse {
             0%, 100% {
@@ -1138,8 +1116,8 @@
                 );
             opacity: 0.06;
             border-radius: 50%;
-            animation: float 20s ease-in-out infinite;
             filter: blur(2px);
+            transform: translateY(0) rotate(0deg);
         }
 
         .hero::after {
@@ -1157,7 +1135,7 @@
                 );
             opacity: 0.08;
             border-radius: 50%;
-            animation: pulse 15s ease-in-out infinite;
+            opacity: 0.05;
         }
 
         .hero-content {
@@ -1201,7 +1179,6 @@
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer 3s ease-in-out infinite;
         }
 
         .hero-text h1 .highlight::after {
@@ -1220,7 +1197,7 @@
             z-index: -1;
             border-radius: 8px;
             filter: blur(1px);
-            animation: pulse 2s ease-in-out infinite;
+            opacity: 0.3;
         }
 
         .hero-text .lead {
@@ -1300,7 +1277,7 @@
                 rgba(58, 69, 49, 0.95) 0%,
                 rgba(68, 81, 59, 0.9) 100%
             );
-            transform: translateY(-3px) scale(1.02);
+            transform: translateY(-2px);
             box-shadow: 
                 0 15px 50px rgba(44, 53, 40, 0.4),
                 0 8px 30px rgba(0, 0, 0, 0.15),
@@ -1387,7 +1364,6 @@
                 var(--primary) 100%
             );
             background-size: 200% 100%;
-            animation: shimmer 3s ease-in-out infinite;
         }
 
         .hero-card::after {
@@ -1406,7 +1382,7 @@
                     transparent 360deg
                 );
             z-index: -1;
-            animation: float 25s linear infinite;
+            transform: translateY(0) rotate(0deg);
         }
 
         .hero-card-header {
