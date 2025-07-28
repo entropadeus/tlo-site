@@ -823,6 +823,138 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* ===== CONTACT FORM STYLES ===== */
+        .contact-section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .form-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            line-height: 1.5;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            justify-content: flex-start;
+            margin: 1.5rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
+            accent-color: var(--warm);
+            cursor: pointer;
+            margin-top: 2px;
+            border-radius: 4px;
+        }
+
+        .form-checkbox label {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            cursor: pointer;
+            font-weight: 400;
+            text-align: left;
+            flex: 1;
+            transition: color 0.2s ease;
+        }
+
+        .form-checkbox:hover label {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .form-checkbox input[type="checkbox"]:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+            outline-offset: 2px;
+        }
+
+        .form-checkbox input[type="checkbox"]:checked {
+            transform: scale(1.05);
+            transition: transform 0.1s ease;
+        }
+
+        #submitBtn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 768px) {
             .logo {
@@ -884,6 +1016,62 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .contact-form {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .form-columns {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 1rem 1.25rem;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .form-group textarea {
+                min-height: 150px;
+            }
+
+            .contact-section {
+                padding: 4rem 0;
+            }
+
+            .contact-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .contact-section p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .form-checkbox {
+                margin: 2rem 0;
+                gap: 0.875rem;
+                max-width: 100%;
+                padding: 0 0.5rem;
+            }
+
+            .form-checkbox input[type="checkbox"] {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+                min-height: 28px;
+                margin-top: 1px;
+            }
+
+            .form-checkbox label {
+                font-size: 1rem;
+                line-height: 1.5;
+                font-weight: 400;
+            }
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 0 1rem;
@@ -899,6 +1087,23 @@
 
             .feature-card {
                 padding: 2rem;
+            }
+
+            .form-checkbox {
+                gap: 0.75rem;
+                padding: 0 0.25rem;
+            }
+
+            .form-checkbox input[type="checkbox"] {
+                width: 26px;
+                height: 26px;
+                min-width: 26px;
+                min-height: 26px;
+            }
+
+            .form-checkbox label {
+                font-size: 0.95rem;
+                line-height: 1.45;
             }
         }
     </style>
@@ -1093,15 +1298,42 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
+    <!-- Contact Form Section -->
+    <section class="contact-section" id="contact" style="background: linear-gradient(rgba(26, 58, 93, 0.9), rgba(26, 58, 93, 0.9)), url('../images/bigstock-Decorative-Scales-Of-Justice-I-21638180.jpg') center/cover no-repeat;">
         <div class="container">
-            <h2>Protect Your Loved One with Compassion</h2>
-            <p class="lead">Guardianship decisions are never easy, but you don't have to navigate them alone. Let me help you explore all options and find the best path forward for your family.</p>
-            <a href="../index.html#contact" class="btn btn-white">
-                <i class="fas fa-phone"></i>
-                Call (817) 769-2750
-            </a>
+            <h2>Ready to Protect Your Loved One?</h2>
+            <p>Don't wait for tomorrow. Take the first step toward compassionate guardianship guidance today.</p>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-columns">
+                    <div class="form-left">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Full Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-right">
+                        <div class="form-group">
+                            <textarea id="subject" name="subject" placeholder="Subject / Message" required rows="8"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="agreement" name="agreement" required>
+                    <label for="agreement">By checking this box, I understand that this message does not constitute legal advice and does not create an attorney-client relationship with Turkett Law Office.</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Send Message</button>
+            </form>
         </div>
     </section>
 
@@ -1217,9 +1449,56 @@
             handleHeaderScroll();
         }, 16); // 60fps
 
+        // Contact form functionality
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            const agreementCheckbox = document.getElementById('agreement');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Enable/disable submit button based on checkbox
+            if (agreementCheckbox && submitBtn) {
+                agreementCheckbox.addEventListener('change', function() {
+                    submitBtn.disabled = !this.checked;
+                });
+            }
+
+            // Form submission handling
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Basic form validation
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const subject = document.getElementById('subject').value.trim();
+                    const isAgreed = document.getElementById('agreement').checked;
+
+                    if (!name || !email || !subject || !isAgreed) {
+                        alert('Please fill in all required fields and check the agreement box.');
+                        return;
+                    }
+
+                    // Email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        alert('Please enter a valid email address.');
+                        return;
+                    }
+
+                    // Show success message (since this is frontend-only)
+                    alert('Thank you for your message! We will contact you soon.');
+                    
+                    // Reset form
+                    contactForm.reset();
+                    submitBtn.disabled = true;
+                });
+            }
+        }
+
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initSmoothScrolling();
+            initContactForm();
             
             // Add scroll event listener
             window.addEventListener('scroll', handleScroll);

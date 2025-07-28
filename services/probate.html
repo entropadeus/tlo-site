@@ -738,6 +738,127 @@
             box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
         }
 
+        /* ===== CONTACT FORM STYLES ===== */
+        .contact-section {
+            padding: 6rem 0;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            line-height: 1.5;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            justify-content: flex-start;
+            margin: 1.5rem 0;
+            text-align: left;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
+            accent-color: var(--warm);
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .form-checkbox label {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            cursor: pointer;
+            font-weight: 400;
+            text-align: left;
+            margin: 0;
+        }
+
+        .form-checkbox:hover label {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .form-checkbox input[type="checkbox"]:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+            outline-offset: 2px;
+        }
+
+        .form-checkbox input[type="checkbox"]:checked {
+            transform: scale(1.05);
+            transition: transform 0.1s ease;
+        }
+
+        #submitBtn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         /* ===== FOOTER ===== */
         .footer {
             background: var(--primary);
@@ -882,6 +1003,61 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
+
+            /* Contact Form Mobile Styles */
+            .contact-form {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .form-columns {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 1rem 1.25rem;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .form-group textarea {
+                min-height: 150px;
+            }
+
+            .contact-section {
+                padding: 4rem 0;
+            }
+
+            .contact-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .contact-section p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .form-checkbox {
+                margin: 2rem 0;
+                gap: 0.875rem;
+                max-width: 100%;
+                padding: 0 0.5rem;
+            }
+
+            .form-checkbox input[type="checkbox"] {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+                min-height: 28px;
+                margin-top: 1px;
+            }
+
+            .form-checkbox label {
+                font-size: 1rem;
+                line-height: 1.5;
+                font-weight: 400;
+            }
         }
 
         @media (max-width: 480px) {
@@ -986,7 +1162,6 @@
                     <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
                         <li>Asset inventory and valuation</li>
                         <li>Creditor notice and claims processing</li>
-                        <li>Tax return preparation and filing</li>
                         <li>Final distribution to beneficiaries</li>
                         <li>Court reporting and compliance</li>
                     </ul>
@@ -1004,6 +1179,7 @@
                     <p>Many families are surprised to learn that formal probate isn't always necessary. Texas law provides several alternatives that can save time and money while still ensuring proper asset transfer to heirs and beneficiaries.</p>
                     <p>I evaluate each estate to determine if alternatives like small estate affidavits, muniment of title, or trust administration might be appropriate, helping families avoid unnecessary court proceedings when possible.</p>
                     <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                        <li>Affidavits of Heirship</li>
                         <li>Small Estate Affidavit (under $75,000)</li>
                         <li>Muniment of Title procedures</li>
                         <li>Joint tenancy and beneficiary transfers</li>
@@ -1018,34 +1194,6 @@
                     <div class="fallback-icon" style="display: none;">
                         <i class="fas fa-users"></i>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Will Contests & Disputes Section -->
-    <section class="section section-cream">
-        <div class="container">
-            <div class="content-grid">
-                <div class="content-image">
-                    <img src="../images/bigstock-Decorative-Scales-Of-Justice-I-21638180.jpg" alt="Scales of justice" 
-                         loading="lazy" decoding="async"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="fallback-icon" style="display: none;">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                </div>
-                <div class="content-text">
-                    <h3>Will Contests & Estate Disputes</h3>
-                    <p>Unfortunately, family disputes sometimes arise during probate proceedings. Whether you need to contest a will due to fraud, undue influence, or lack of capacity, or defend against unfounded challenges, I provide experienced representation.</p>
-                    <p>I work to resolve disputes through negotiation when possible, but I'm fully prepared to litigate when necessary to protect my clients' rights and ensure the decedent's true wishes are honored.</p>
-                    <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
-                        <li>Will contest litigation</li>
-                        <li>Undue influence claims</li>
-                        <li>Lack of testamentary capacity</li>
-                        <li>Beneficiary disputes</li>
-                        <li>Executor misconduct claims</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -1121,15 +1269,42 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact" style="background: linear-gradient(rgba(26, 58, 93, 0.9), rgba(26, 58, 93, 0.9)), url('../images/bigstock-Decorative-Scales-Of-Justice-I-21638180.jpg') center/cover no-repeat;">
         <div class="container">
             <h2>Navigate Probate with Confidence</h2>
-            <p class="lead">Probate doesn't have to be overwhelming. Let me guide you through the process with experience, efficiency, and compassion during this difficult time.</p>
-            <a href="../index.html#contact" class="btn btn-white">
-                <i class="fas fa-phone"></i>
-                Call (817) 769-2750
-            </a>
+            <p>Probate doesn't have to be overwhelming. Let me guide you through the process with experience, efficiency, and compassion during this difficult time.</p>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-columns">
+                    <div class="form-left">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Full Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-right">
+                        <div class="form-group">
+                            <textarea id="subject" name="subject" placeholder="Subject / Message" required rows="8"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="agreement" name="agreement" required>
+                    <label for="agreement">By checking this box, I understand that this message does not constitute legal advice and does not create an attorney-client relationship with Turkett Law Office.</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Send Message</button>
+            </form>
         </div>
     </section>
 
@@ -1254,6 +1429,50 @@
             
             // Initial header state
             handleHeaderScroll();
+
+            // Contact form functionality
+            const contactForm = document.getElementById('contactForm');
+            const agreementCheckbox = document.getElementById('agreement');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Enable/disable submit button based on checkbox
+            if (agreementCheckbox && submitBtn) {
+                agreementCheckbox.addEventListener('change', function() {
+                    submitBtn.disabled = !this.checked;
+                });
+            }
+
+            // Form submission handling
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Basic form validation
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const subject = document.getElementById('subject').value.trim();
+                    const isAgreed = document.getElementById('agreement').checked;
+
+                    if (!name || !email || !subject || !isAgreed) {
+                        alert('Please fill in all required fields and check the agreement box.');
+                        return;
+                    }
+
+                    // Email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        alert('Please enter a valid email address.');
+                        return;
+                    }
+
+                    // Show success message (since this is frontend-only)
+                    alert('Thank you for your message! We will contact you soon.');
+                    
+                    // Reset form
+                    contactForm.reset();
+                    submitBtn.disabled = true;
+                });
+            }
         });
 
     </script>

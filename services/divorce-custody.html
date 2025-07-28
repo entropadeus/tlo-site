@@ -753,6 +753,184 @@
             box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
         }
 
+        /* ===== CONTACT FORM STYLES ===== */
+        .contact-section {
+            background: linear-gradient(rgba(26, 58, 93, 0.9), rgba(26, 58, 93, 0.9)), url('../images/bigstock-Decorative-Scales-Of-Justice-I-21638180.jpg') center/cover no-repeat;
+            padding: 6rem 0;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-section h2 {
+            color: white;
+            font-size: var(--text-4xl);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: var(--text-xl);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: var(--text-base);
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--warm);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 4px rgba(229, 172, 72, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin: 2.5rem 0;
+            max-width: 100%;
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
+            accent-color: var(--warm);
+            margin-top: 2px;
+        }
+
+        .form-checkbox label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: var(--text-sm);
+            line-height: 1.5;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: var(--text-base);
+            font-weight: 600;
+        }
+
+        .contact-form .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .contact-form .btn:disabled:hover {
+            transform: none;
+            box-shadow: 0 10px 40px rgba(44, 53, 40, 0.3), 0 4px 20px rgba(0, 0, 0, 0.1), inset 0 2px 16px rgba(255, 255, 255, 0.15);
+        }
+
+        /* Contact Form Mobile Styles */
+        @media (max-width: 768px) {
+            .contact-form {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .form-columns {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 1rem 1.25rem;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .form-group textarea {
+                min-height: 150px;
+            }
+
+            .contact-section {
+                padding: 4rem 0;
+            }
+
+            .contact-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .contact-section p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .form-checkbox {
+                margin: 2rem 0;
+                gap: 0.875rem;
+                max-width: 100%;
+                padding: 0 0.5rem;
+            }
+
+            .form-checkbox input[type="checkbox"] {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+                min-height: 28px;
+                margin-top: 1px;
+            }
+
+            .form-checkbox label {
+                font-size: 1rem;
+                line-height: 1.5;
+                font-weight: 400;
+            }
+        }
+
         /* ===== FOOTER ===== */
         .footer {
             padding: 4rem 0 2rem;
@@ -941,7 +1119,7 @@
             <div class="hero-content">
                 <i class="fas fa-heart hero-icon"></i>
                 <h1>Divorce & Child Custody</h1>
-                <p class="lead">Sometimes relationships end. I provide compassionate guidance through divorce and child custody disputes, helping you secure fair arrangements that protect your children's best interests and your rights as a parent.</p>
+                <p class="lead">Sometimes relationships end. I provide compassionate guidance through divorce and child custody disputes, helping you secure a fair property division and arrangements that protect your children's best interests and your rights as a parent.</p>
                 <a href="../index.html#contact" class="btn btn-primary">
                     <i class="fas fa-calendar-alt"></i>
                     Schedule Consultation
@@ -956,7 +1134,7 @@
             <div class="content-grid">
                 <div class="content-text">
                     <h3>Fair Property Division</h3>
-                    <p>Texas follows community property laws, which means assets acquired during marriage are typically divided equally. I'll help you understand what you're entitled to and work to ensure a fair division of property, debts, and assets.</p>
+                    <p>Texas follows community property laws, which means assets acquired during marriage are owned equally by both spouses. However, Texas law requires that in a divorce, assets be divided in a "just and right" manner, which may or may not be equal depending on your specific circumstances. I'll help you understand what you're entitled to and work to ensure a fair division of property, debts, and assets.</p>
                     <p>Separate property owned before marriage, inheritances, and gifts typically remain with the original owner. I'll help identify and protect your separate property interests while ensuring a fair division of community assets.</p>
                     <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
                         <li>Community property evaluation</li>
@@ -1012,7 +1190,7 @@
             <div class="content-grid">
                 <div class="content-text">
                     <h3>The Divorce Process in Texas</h3>
-                    <p>Texas allows both fault and no-fault divorce. Most divorces are filed on grounds of "insupportability" (no-fault), but fault grounds may be relevant for property division or custody considerations.</p>
+                    <p>Texas allows both fault and no-fault divorce. Most divorces are filed on no-fault grounds of "insupportability," but fault grounds may be relevant for property division or custody considerations.</p>
                     <p>Understanding the legal process can help reduce anxiety during this challenging time. Many divorce cases can be resolved through mediation or collaborative divorce, which can be less costly and emotionally taxing than litigation.</p>
                     <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
                         <li>Residency requirements evaluation</li>
@@ -1104,15 +1282,42 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
+    <!-- Contact Form Section -->
+    <section class="contact-section" id="contact" style="background: linear-gradient(rgba(26, 58, 93, 0.9), rgba(26, 58, 93, 0.9)), url('../images/bigstock-Decorative-Scales-Of-Justice-I-21638180.jpg') center/cover no-repeat;">
         <div class="container">
-            <h2>Protect Your Family's Future Today</h2>
-            <p class="lead">Don't navigate this difficult time alone. Let me help you understand your rights and options during this challenging period.</p>
-            <a href="../index.html#contact" class="btn btn-white">
-                <i class="fas fa-phone"></i>
-                Call (817) 769-2750
-            </a>
+            <h2>Ready to Protect Your Family's Future?</h2>
+            <p>Don't navigate this difficult time alone. Take the first step toward understanding your rights and options today.</p>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-columns">
+                    <div class="form-left">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Full Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-right">
+                        <div class="form-group">
+                            <textarea id="subject" name="subject" placeholder="Subject / Message" required rows="8"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="agreement" name="agreement" required>
+                    <label for="agreement">By checking this box, I understand that this message does not constitute legal advice and does not create an attorney-client relationship with Turkett Law Office.</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Send Message</button>
+            </form>
         </div>
     </section>
 
@@ -1240,7 +1445,52 @@
             
             // Initial header state
             handleHeaderScroll();
+            
+            // Initialize form functionality
+            initContactForm();
         });
+
+        // Contact form functionality
+        function initContactForm() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const agreementCheckbox = document.getElementById('agreement');
+            
+            if (!form || !submitBtn || !agreementCheckbox) return;
+            
+            // Enable/disable submit button based on agreement checkbox
+            agreementCheckbox.addEventListener('change', function() {
+                submitBtn.disabled = !this.checked;
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic form validation
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                
+                if (!name || !email || !subject) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                if (!agreementCheckbox.checked) {
+                    alert('Please agree to the terms before submitting.');
+                    return;
+                }
+                
+                // Here you would typically send the form data to your server
+                // For now, we'll just show a success message
+                alert('Thank you for your message! We will contact you soon.');
+                
+                // Reset form
+                form.reset();
+                submitBtn.disabled = true;
+            });
+        }
 
     </script>
 </body>
