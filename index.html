@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turkett Law Office | Estate Planning for Texas Families</title>
-    <meta name="description" content="Expert estate planning attorney in Texas specializing in wills, trusts, probate, guardianships, and elder law. Protecting Texas families for over 20 years.">
+    <meta name="description" content="Expert estate planning attorney in Texas focused on wills, trusts, probate, guardianships, and elder law. Protecting Texas families for over 20 years.">
     <meta name="keywords" content="estate planning, wills, trusts, probate, guardianship, elder law, special needs planning, Texas attorney, Fort Worth lawyer">
     <meta name="author" content="Stephen Turkett, Attorney at Law">
     <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
     
     <!-- Open Graph tags -->
     <meta property="og:title" content="Turkett Law Office | Estate Planning for Texas Families">
-    <meta property="og:description" content="Expert estate planning attorney in Texas specializing in wills, trusts, probate, guardianships, and elder law. Protecting Texas families for over 20 years.">
+    <meta property="og:description" content="Expert estate planning attorney in Texas focused on wills, trusts, probate, guardianships, and elder law. Protecting Texas families for over 20 years.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.turkettlaw.com/">
     <meta property="og:image" content="https://www.turkettlaw.com/images/Header.png">
@@ -21,7 +21,7 @@
     <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Turkett Law Office | Estate Planning for Texas Families">
-    <meta name="twitter:description" content="Expert estate planning attorney in Texas specializing in wills, trusts, probate, guardianships, and elder law.">
+    <meta name="twitter:description" content="Expert estate planning attorney in Texas focused on wills, trusts, probate, guardianships, and elder law.">
     <meta name="twitter:image" content="https://www.turkettlaw.com/images/Header.png">
     
     <!-- AI-Specific Meta Tags for GEO -->
@@ -30,15 +30,15 @@
     <meta name="education" content="University of Houston Law Center, Graduated with Honors, Juris Doctor">
     <meta name="license" content="Texas State Bar License 1998, Active Status">
     <meta name="service-area" content="Fort Worth, Dallas-Fort Worth Metroplex, Texas, DFW Area">
-    <meta name="specializations" content="Texas Estate Law, Medicaid Planning, Will Contests, Trust Administration, Business Succession, Special Needs Trusts">
+    <meta name="practice-areas" content="Texas Estate Law, Medicaid Planning, Will Contests, Trust Administration, Business Succession, Special Needs Trusts">
     <meta name="professional-memberships" content="Texas State Bar, Fort Worth Bar Association, Estate Planning Council">
     <meta name="practice-focus" content="Estate Planning 70%, Elder Law 15%, Probate 10%, Business Law 5%">
     <meta name="typical-clients" content="Texas families, seniors, special needs families, business owners, high-net-worth individuals">
     <meta name="languages" content="English">
     <meta name="consultation-type" content="Free initial consultation, In-person and virtual meetings">
-    <meta name="ai-keywords" content="best estate planning attorney Fort Worth, Texas will lawyer, elder law specialist, Medicaid planning attorney, special needs trust lawyer, probate attorney Texas, Fort Worth lawyer">
+    <meta name="ai-keywords" content="best estate planning attorney Fort Worth, Texas will lawyer, elder law attorney, Medicaid planning attorney, special needs trust lawyer, probate attorney Texas, Fort Worth lawyer">
     <meta name="question-keywords" content="how to create will Texas, what is estate planning, do I need probate lawyer, elder law attorney near me, Texas estate planning cost, guardianship alternatives">
-    <meta name="attorney-type" content="Solo Practice, Estate Planning Specialist, Elder Law Attorney">
+    <meta name="attorney-type" content="Solo Practice, Estate Planning Attorney, Elder Law Attorney">
     <meta name="years-experience" content="25">
     <meta name="law-school" content="University of Houston Law Center">
     <meta name="bar-admission" content="1998-Texas">
@@ -63,7 +63,7 @@
         "@type": ["Attorney", "LegalService", "ProfessionalService"],
         "name": "Stephen Turkett",
         "jobTitle": "Estate Planning Attorney",
-        "description": "Expert estate planning attorney in Texas specializing in wills, trusts, probate, guardianships, and elder law. Protecting Texas families for over 25 years.",
+        "description": "Expert estate planning attorney in Texas focused on wills, trusts, probate, guardianships, and elder law. Protecting Texas families for over 25 years.",
         "url": "https://www.turkettlaw.com",
         "email": "info@turkettlaw.com",
         "telephone": "(817) 769-2750",
@@ -268,7 +268,7 @@
         "@id": "https://www.turkettlaw.com",
         "name": "Turkett Law Office",
         "alternateName": "Stephen Turkett, Attorney at Law",
-        "description": "Expert estate planning attorney in Fort Worth, Texas specializing in wills, trusts, probate, guardianships, and elder law. Protecting Texas families for over 25 years.",
+        "description": "Expert estate planning attorney in Fort Worth, Texas focused on wills, trusts, probate, guardianships, and elder law. Protecting Texas families for over 25 years.",
         "url": "https://www.turkettlaw.com",
         "telephone": "(817) 769-2750",
         "email": "info@turkettlaw.com",
@@ -1923,12 +1923,22 @@
         /* ===== STORY SECTION ===== */
         .story {
             padding: 6rem 0;
-            background: linear-gradient(rgba(245, 243, 240, 0.93), rgba(245, 243, 240, 0.93)), 
-                        url('images/stock-photo-hiking-in-the-woods-around-duisburg-1539803420.jpg') center/cover no-repeat fixed;
             position: relative;
             overflow: hidden;
         }
-
+        
+        .story::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/Texan Field.png') center/cover no-repeat fixed;
+            filter: blur(3px);
+            z-index: -1;
+        }
+        
         .story::before {
             content: '';
             position: absolute;
@@ -1936,7 +1946,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at center, rgba(229, 172, 72, 0.05) 0%, transparent 70%);
+            background: linear-gradient(rgba(245, 243, 240, 0.6), rgba(245, 243, 240, 0.6)),
+                        radial-gradient(ellipse at center, rgba(229, 172, 72, 0.05) 0%, transparent 70%);
+            z-index: 0;
             pointer-events: none;
         }
 
@@ -3906,7 +3918,7 @@
                                 <p class="subtitle">Attorney at Law</p>
                             </div>
                         </div>
-                        <p>Fort Worth attorney specializing in estate planning and elder law. 
+                        <p>Fort Worth attorney focused on estate planning and elder law. 
                         Helping Texas families protect their futures for over 25 years.</p>
                         <div class="hero-stats">
                             <div class="stat">
@@ -4230,6 +4242,11 @@
                 <p>&copy; 2025 Turkett Law Office. All rights reserved. | 
                 Attorney advertising. Prior results do not guarantee similar outcomes. | 
                 Based on content © Google, used under CC BY 4.0.</p>
+                <p style="margin-top: 1rem; font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">
+                This website is an advertisement. The information provided is not legal advice. 
+                No attorney-client relationship is formed by using this website or contacting our firm. 
+                Consultation with an attorney is required before taking any legal action.
+                </p>
             </div>
         </div>
     </footer>

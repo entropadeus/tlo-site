@@ -3,7 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
-This is a static single-page website for Turkett Law Office, a Texas-based law firm specializing in estate planning. The entire website is contained in a single `index.html` file with embedded CSS and JavaScript.
+This is a static single-page website for Turkett Law Office, a Texas-based law firm focused on estate planning. The entire website is contained in a single `index.html` file with embedded CSS and JavaScript.
 
 ## Technology Stack
 - Pure HTML5, CSS3, and vanilla JavaScript
