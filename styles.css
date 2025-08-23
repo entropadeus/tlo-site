@@ -112,6 +112,13 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Responsive media elements */
+img, picture, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Skip Navigation Link */
 .skip-nav {
     position: absolute;
@@ -585,5 +592,23 @@ p {
     .related-posts-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
     }
 }
