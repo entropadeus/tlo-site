@@ -690,6 +690,15 @@
             }
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         @keyframes slideInLeft {
             0% {
                 opacity: 0;
@@ -798,7 +807,7 @@
         /* ===== PERFORMANCE OPTIMIZATION ===== */
         /* Hardware acceleration for smooth animations */
         .service-card, .blog-card, .nav-link, .btn-primary, .btn-outline,
-        .hero-card, .story-photo, .floating-cta, .scroll-to-top {
+        .hero-card, .floating-cta, .scroll-to-top {
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
             will-change: transform;
@@ -2098,7 +2107,7 @@
             position: relative;
             display: flex;
             justify-content: center;
-            animation: fadeInUp 2.0s ease-out 0.2s both;
+            animation: fadeIn 1.5s ease-out 0.2s both;
         }
 
         .story-photo {
@@ -2106,13 +2115,14 @@
             backdrop-filter: blur(15px);
             padding: 2.5rem;
             border-radius: 24px;
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(38, 37, 31, 0.15),
                 inset 0 4px 20px rgba(255, 255, 255, 0.4);
             text-align: center;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: transform 0.8s ease, box-shadow 0.3s ease;
+            transition: opacity 0.8s ease, box-shadow 0.3s ease;
+            transform: none;
         }
 
         .story-photo:hover {
@@ -5000,7 +5010,7 @@
             });
             
             // Image parallax effects
-            const parallaxImages = document.querySelectorAll('.hero-image img, .story-photo');
+            const parallaxImages = document.querySelectorAll('.hero-image img');
             parallaxImages.forEach((img, index) => {
                 const imgRect = img.getBoundingClientRect();
                 if (imgRect.top < window.innerHeight && imgRect.bottom > 0) {
@@ -5109,7 +5119,7 @@
                 
                 switch(type) {
                     case 'fade':
-                        element.style.animation = `fadeInUp 2.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
+                        element.style.animation = `fadeIn 2.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
                         break;
                     case 'slide':
                         const direction = element.dataset.slideDirection || 'up';
@@ -5169,12 +5179,11 @@
                     element.dataset.slideDirection = 'left';
                     this.observe(element, 'slide');
                 });
-                
+
                 document.querySelectorAll('.story-photo').forEach(element => {
-                    element.dataset.slideDirection = 'right';
-                    this.observe(element, 'slide');
+                    this.observe(element, 'fade');
                 });
-                
+
                 // Observe stats with bounce effect
                 document.querySelectorAll('.stat').forEach((stat, index) => {
                     stat.style.animationDelay = `${index * 0.2}s`;
