@@ -612,3 +612,9 @@ p {
         font-size: 1.25rem;
     }
 }
+
+@media (max-width: 768px) {
+    .parallax-element, .hero-image, .story-photo {
+        transform: none !important;
+    }
+}
