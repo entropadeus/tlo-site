@@ -4096,11 +4096,11 @@
                         Helping Texas families protect their futures for over 25 years.</p>
                         <div class="hero-stats">
                             <div class="stat">
-                                <span class="stat-number">25+</span>
+                                <span class="stat-number" data-target="25">0</span>+
                                 <span class="stat-label">Years Experience</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-number">500+</span>
+                                <span class="stat-number" data-target="500">0</span>+
                                 <span class="stat-label">Families Helped</span>
                             </div>
                         </div>
@@ -5291,7 +5291,37 @@
                 });
             }
         }
-        
+
+        // Count up animation for stats
+        function countUp(el) {
+            const target = parseInt(el.getAttribute('data-target'), 10);
+            if (isNaN(target)) return;
+
+            // Respect user's motion preferences
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                el.textContent = `${target}+`;
+                return;
+            }
+
+            let start = null;
+            const duration = 2000;
+
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                const progress = Math.min((timestamp - start) / duration, 1);
+                const value = Math.floor(progress * target);
+                el.textContent = value;
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    el.textContent = `${target}+`;
+                }
+            }
+
+            requestAnimationFrame(step);
+        }
+
         // Enhanced smooth scrolling with easing
         function smoothScrollTo(target, duration = 800) {
             const targetElement = document.querySelector(target);
@@ -5342,7 +5372,22 @@
             setTimeout(() => {
                 scrollAnimationController.observeAll();
             }, 100);
-            
+
+            // Trigger count up when stats enter viewport
+            const statObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const number = entry.target.querySelector('.stat-number');
+                        if (number) {
+                            countUp(number);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.stat').forEach(stat => statObserver.observe(stat));
+
             // Add scroll listener for header and new features with throttling
             let ticking = false;
             function requestTick() {
