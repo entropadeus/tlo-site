@@ -772,6 +772,17 @@
             align-items: start;
         }
 
+        .form-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-right {
+            display: flex;
+            flex-direction: column;
+        }
+
         .form-group {
             position: relative;
         }
@@ -784,9 +795,11 @@
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
             font-family: var(--font-body);
+            box-sizing: border-box;
+            resize: vertical;
         }
 
         .form-group input::placeholder,
@@ -797,9 +810,9 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: rgba(255, 255, 255, 0.5);
+            border-color: var(--warm);
             background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(229, 172, 72, 0.2);
         }
 
         .form-group textarea {

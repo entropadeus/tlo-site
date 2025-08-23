@@ -765,18 +765,31 @@
         .contact-form {
             max-width: 800px;
             margin: 0 auto;
-            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
         .form-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            margin-bottom: 2rem;
+            align-items: start;
+        }
+
+        .form-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-right {
+            display: flex;
+            flex-direction: column;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .form-group input,
@@ -788,9 +801,11 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             color: white;
-            font-size: var(--text-base);
+            font-size: 1rem;
             transition: all 0.3s ease;
             font-family: var(--font-body);
+            box-sizing: border-box;
+            resize: vertical;
         }
 
         .form-group input::placeholder,
@@ -807,15 +822,15 @@
         }
 
         .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
+            min-height: 200px;
+            line-height: 1.5;
         }
 
         .form-checkbox {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            margin: 2.5rem 0;
+            margin: 1.5rem 0;
             max-width: 100%;
         }
 
