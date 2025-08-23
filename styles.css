@@ -307,6 +307,21 @@ p {
     transform: translateY(-2px);
 }
 
+@media (max-width: 768px) {
+    .btn {
+        padding: 1rem 2rem;
+        min-width: 160px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        width: 100%;
+        max-width: 240px;
+    }
+}
+
 /* ===== BREADCRUMBS ===== */
 .breadcrumbs {
     padding: 1rem 0;
