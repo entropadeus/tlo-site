@@ -4935,6 +4935,7 @@
             const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrollPercent = (scrollTop / documentHeight) * 100;
             const normalizedScroll = scrollTop / window.innerHeight;
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
             
             // Enhanced header scroll effects with smooth transitions
             if (scrollTop > 100) {
@@ -4962,11 +4963,16 @@
             }
             
             // Add parallax effects to various elements
-            handleParallaxEffects(scrollTop, normalizedScroll);
+            if (!isMobile) {
+                handleParallaxEffects(scrollTop, normalizedScroll);
+            }
         }
-        
+
         // Advanced parallax effects controller
         function handleParallaxEffects(scrollTop, normalizedScroll) {
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            if (isMobile) return;
+
             // Parallax for hero background elements
             const heroElements = document.querySelectorAll('.hero-card, .hero-image');
             heroElements.forEach((element, index) => {
