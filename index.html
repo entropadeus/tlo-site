@@ -1644,7 +1644,7 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
             position: relative;
             z-index: 1;
@@ -2206,7 +2206,7 @@
 
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
             margin-bottom: 4rem;
             position: relative;
@@ -2719,7 +2719,7 @@
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
             margin-bottom: 3rem;
         }
@@ -3048,6 +3048,10 @@
         .form-checkbox input[type="checkbox"]:checked {
             transform: scale(1.05);
             transition: transform 0.3s ease;
+        }
+
+        .contact-form button {
+            align-self: center;
         }
 
         #submitBtn:disabled {
@@ -5184,10 +5188,9 @@
                     this.observe(element, 'fade');
                 });
 
-                // Observe stats with bounce effect
-                document.querySelectorAll('.stat').forEach((stat, index) => {
-                    stat.style.animationDelay = `${index * 0.2}s`;
-                    this.observe(stat, 'scale');
+                // Observe stats with subtle fade-in
+                document.querySelectorAll('.stat').forEach((stat) => {
+                    this.observe(stat, 'fade');
                 });
                 
                 // Observe section titles
@@ -5278,13 +5281,13 @@
                 scrollAnimationController.observeAll();
             }, 100);
 
-            // Trigger count up when stats enter viewport
+            // Display stats when they enter viewport
             const statObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const number = entry.target.querySelector('.stat-number');
                         if (number) {
-                            countUp(number);
+                            number.textContent = `${number.getAttribute('data-target')}+`;
                         }
                         observer.unobserve(entry.target);
                     }
