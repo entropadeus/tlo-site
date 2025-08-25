@@ -10,8 +10,12 @@
       "Bash(git commit:*)",
       "WebFetch(domain:www.texasbar.com)",
       "Bash(git pull:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Read(/C:\\Users\\turke\\.claude/**)",
+      "Read(/C:\\Users\\turke\\.claude\\output-styles/**)",
+      "Bash(start index.html)"
     ],
     "deny": []
-  }
+  },
+  "outputStyle": "concise-cuss"
 }

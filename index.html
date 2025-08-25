@@ -55,7 +55,6 @@
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     
     <!-- EmailJS SDK for form submission -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -459,21 +458,8 @@
         }
         
 
-        /* ===== TYPOGRAPHY SYSTEM ===== */
+        /* Line Heights */
         :root {
-            /* Typography Scale - Fluid Sizing */
-            --text-xs: clamp(0.75rem, 0.7rem + 0.15vw, 0.875rem);
-            --text-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
-            --text-base: clamp(1rem, 0.95rem + 0.35vw, 1.125rem);
-            --text-lg: clamp(1.125rem, 1.05rem + 0.45vw, 1.25rem);
-            --text-xl: clamp(1.25rem, 1.15rem + 0.65vw, 1.5rem);
-            --text-2xl: clamp(1.5rem, 1.35rem + 0.85vw, 1.875rem);
-            --text-3xl: clamp(1.875rem, 1.65rem + 1.25vw, 2.5rem);
-            --text-4xl: clamp(2.5rem, 2.15rem + 1.85vw, 3.5rem);
-            --text-5xl: clamp(3.5rem, 3rem + 2.75vw, 5rem);
-            --text-6xl: clamp(5rem, 4.25rem + 4.15vw, 7.5rem);
-            
-            /* Line Heights */
             --leading-tight: 1.1;
             --leading-snug: 1.2;
             --leading-normal: 1.4;
@@ -589,6 +575,12 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
         }
 
         .text-primary { color: var(--primary); }
@@ -1126,6 +1118,35 @@
             box-shadow: 
                 0 10px 32px rgba(229, 172, 72, 0.5),
                 inset 0 4px 18px rgba(255, 255, 255, 0.4);
+        }
+
+
+        /* Accessibility Helpers */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .error-message {
+            display: block;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            min-height: 1.25rem;
+        }
+
+        .form-help {
+            display: block;
+            color: #6c757d;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
         }
 
 
@@ -3283,75 +3304,27 @@
 
         @media (max-width: 768px) {
             :root {
-                /* Adjust typography scale for mobile */
-                --text-5xl: clamp(2rem, 3vw, 3rem);
-                --text-4xl: clamp(1.75rem, 2.5vw, 2.25rem);
-                --text-3xl: clamp(1.5rem, 2vw, 1.875rem);
-                --text-2xl: clamp(1.25rem, 1.8vw, 1.5rem);
+                /* Adjust typography scale for mobile - much smaller */
+                --text-5xl: clamp(1.75rem, 2.5vw, 2.25rem);
+                --text-4xl: clamp(1.5rem, 2vw, 1.875rem);
+                --text-3xl: clamp(1.25rem, 1.8vw, 1.5rem);
+                --text-2xl: clamp(1.125rem, 1.5vw, 1.25rem);
+                --text-lg: clamp(1rem, 1.2vw, 1.125rem);
+                --text-base: clamp(0.9rem, 1vw, 1rem);
             }
 
             .header {
-                height: 80px;
+                height: 55px;
             }
             
             .nav {
-                padding: 1.25rem 0;
+                padding: 0.5rem 0;
             }
             
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 80px;
-                flex-direction: column;
-                background: rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(40px) saturate(150%) contrast(110%);
-                -webkit-backdrop-filter: blur(40px) saturate(150%) contrast(110%);
-                width: 100%;
-                height: calc(100vh - 80px);
-                text-align: center;
-                transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 
-                    0 15px 50px rgba(31, 38, 135, 0.2),
-                    inset 0 8px 30px rgba(255, 255, 255, 0.4);
-                padding: 3rem 2rem;
-                overflow-y: auto;
-                transform: translateZ(0);
-                -webkit-transform: translateZ(0);
-                border-right: 1px solid rgba(255, 255, 255, 0.4);
-                gap: 1.5rem;
-                justify-content: flex-start;
+            .logo-image {
+                height: 45px;
             }
-
-            .nav-menu::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(135deg, 
-                    rgba(255, 255, 255, 0.3) 0%, 
-                    rgba(255, 255, 255, 0.1) 50%, 
-                    rgba(255, 255, 255, 0.2) 100%);
-                z-index: -1;
-                opacity: 0.8;
-            }
-
-            .nav-menu.active {
-                left: 0;
-                animation: slideInFromRight 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-
-            @keyframes slideInFromRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
+            
 
             
             .nav {
@@ -3361,24 +3334,51 @@
             .logo {
                 margin: 0 auto;
             }
+            
+            .nav-menu {
+                display: none;
+            }
 
             /* Hero section mobile styles */
             .hero {
-                padding: 6rem 0 4rem;
-                min-height: calc(100vh - 80px);
+                padding-top: calc(55px + 3.5rem);
+                padding-bottom: 2rem;
+                min-height: calc(70vh - 55px);
                 background-attachment: scroll;
             }
             
             .hero-content {
-                gap: 3rem;
+                gap: 1.5rem;
                 min-height: auto;
             }
 
             .hero-card {
-                padding: 2.5rem;
-                border-radius: 24px;
+                padding: 1.25rem;
+                border-radius: 16px;
                 max-width: none;
                 margin: 0;
+            }
+            
+            .hero-card-header {
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .hero-card h3 {
+                margin-bottom: 0.25rem;
+                font-size: var(--text-xl);
+            }
+            
+            .hero-card p {
+                margin-bottom: 1rem;
+                font-size: var(--text-sm);
+                line-height: 1.4;
+            }
+            
+            .hero-card .attorney-photo {
+                width: 120px !important;
+                height: 120px !important;
+                border-width: 3px !important;
             }
             
             .hero-text h1 {
@@ -3396,9 +3396,187 @@
                 gap: 1rem;
             }
             
+            /* Button optimizations for mobile */
+            .btn-outline, .btn-primary, .btn-white, .nav-cta {
+                padding: 0.875rem 1.75rem;
+                font-size: 0.95rem;
+                border-radius: 24px;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-weight: 600;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                border: 2px solid transparent;
+            }
             
+            .btn-outline {
+                background: rgba(255, 255, 255, 0.9);
+                color: var(--primary);
+                border-color: var(--primary);
+            }
+            
+            .btn-primary {
+                background: linear-gradient(135deg, var(--warm) 0%, #d49b3a 100%);
+                color: white;
+                border-color: var(--warm);
+            }
+            
+            .nav-cta {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+                background: rgba(229, 172, 72, 0.9);
+                color: white;
+                border-color: var(--warm);
+            }
+            
+            /* Service cards mobile optimizations */
+            .service-card {
+                padding: 1.5rem;
+                border-radius: 16px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .service-icon {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            
+            /* Blog cards mobile optimizations */
+            .blog-card {
+                padding: 1.25rem;
+                border-radius: 14px;
+            }
+            
+            /* Form optimizations */
+            .form-group input, .form-group textarea {
+                padding: 0.875rem;
+                font-size: 1rem;
+                border-radius: 8px;
+            }
+            
+            /* Content width constraints for better readability */
+            .hero-text, .section-header, .testimonial-text {
+                max-width: 100%;
+            }
+            
+            .hero-text h1, .hero-text .lead {
+                max-width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-text h1 {
+                margin-top: 2rem;
+                font-size: var(--text-5xl);
+                font-weight: 700;
+                line-height: 1.1;
+                color: var(--primary);
+            }
+            
+            .hero-text .lead {
+                font-size: var(--text-sm);
+                font-weight: 300;
+                opacity: 0.8;
+            }
+            
+            .section-header h2 {
+                font-size: var(--text-3xl);
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+            
+            .section-header p {
+                max-width: 85%;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: var(--text-sm);
+                line-height: 1.5;
+                opacity: 0.9;
+            }
+            
+            /* Reduce heavy visual effects on mobile */
+            .hero-card, .service-card, .blog-card, .testimonial-card {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+                backdrop-filter: blur(8px) saturate(110%);
+                -webkit-backdrop-filter: blur(8px) saturate(110%);
+            }
+            
+            .btn-outline, .btn-primary, .btn-white, .nav-cta {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+            }
+            
+            .header {
+                backdrop-filter: blur(8px) saturate(120%);
+                -webkit-backdrop-filter: blur(8px) saturate(120%);
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            }
+            
+            /* Testimonials mobile optimization */
+            .testimonial-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .testimonial-text {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+            }
+            
+            .story-badge {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+            
+            /* Contact form mobile optimization */
+            .contact-form {
+                max-width: 100%;
+                padding: 0;
+            }
+            
+            .form-columns {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .form-checkbox {
+                margin: 1.5rem 0;
+            }
+            
+            .form-checkbox label {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+            
+            
+            /* Stats component fixes */
             .hero-stats {
                 gap: 1rem;
+                padding: 1.5rem 0;
+                margin: 1rem 0;
+            }
+            
+            .stat {
+                padding: 1rem;
+                border-radius: 12px;
+                min-width: auto;
+                flex: 1;
+            }
+            
+            .stat-number {
+                font-size: var(--text-2xl);
+                margin-bottom: 0.25rem;
+            }
+            
+            .stat-label {
+                font-size: 0.8rem;
             }
             
             .stat {
@@ -3455,14 +3633,30 @@
             }
             
             .services-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
                 perspective: none;
             }
             
             .service-card {
-                padding: 2.5rem 2rem;
+                padding: 1.25rem;
                 transform: none !important;
+                border-radius: 12px;
+            }
+            
+            .service-card h3 {
+                font-size: var(--text-lg);
+                margin-bottom: 0.75rem;
+            }
+            
+            .service-card p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+            
+            .service-icon {
+                font-size: 1.75rem;
+                margin-bottom: 0.75rem;
             }
             
             
@@ -3622,19 +3816,43 @@
         
         @media (max-width: 480px) {
             :root {
-                /* Further adjust typography for small mobile */
-                --text-5xl: clamp(2rem, 5vw, 2.75rem);
-                --text-4xl: clamp(1.75rem, 4vw, 2rem);
-                --text-3xl: clamp(1.5rem, 3vw, 1.75rem);
+                /* Further adjust typography for small mobile - even smaller */
+                --text-5xl: clamp(1.5rem, 2vw, 1.875rem);
+                --text-4xl: clamp(1.25rem, 1.8vw, 1.5rem);
+                --text-3xl: clamp(1.125rem, 1.5vw, 1.25rem);
+                --text-2xl: clamp(1rem, 1.2vw, 1.125rem);
             }
             
             .hero {
-                padding: 5rem 0 3rem;
+                padding: 2rem 0 1.5rem;
             }
             
             .hero-card {
-                padding: 2rem;
-                border-radius: 20px;
+                padding: 1.25rem;
+                border-radius: 12px;
+            }
+            
+            /* Service cards even smaller on very small mobile */
+            .services-grid {
+                gap: 0.75rem;
+            }
+            
+            .service-card {
+                padding: 1rem;
+            }
+            
+            .service-card h3 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .service-card p {
+                font-size: 0.8rem;
+            }
+            
+            .service-icon {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
             }
             
             .hero-buttons {
@@ -4340,36 +4558,46 @@
             <h2>Ready to Protect Your Family's Future?</h2>
             <p>Don't wait for tomorrow. Take the first step toward peace of mind today.</p>
             
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form" id="contactForm" role="form" aria-labelledby="contact-heading">
                 <div class="form-columns">
                     <div class="form-left">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Full Name" required>
+                            <label for="name" class="sr-only">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Full Name" required aria-describedby="name-error" autocomplete="name">
+                            <span id="name-error" class="error-message" role="alert" aria-live="polite"></span>
                         </div>
                         
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                            <label for="email" class="sr-only">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Email Address" required aria-describedby="email-error" autocomplete="email">
+                            <span id="email-error" class="error-message" role="alert" aria-live="polite"></span>
                         </div>
                         
                         <div class="form-group">
-                            <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)">
+                            <label for="phone" class="sr-only">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)" aria-describedby="phone-help" autocomplete="tel">
+                            <span id="phone-help" class="form-help">Optional - for callback preferences</span>
                         </div>
                     </div>
                     
                     <div class="form-right">
                         <div class="form-group">
-                            <textarea id="subject" name="subject" placeholder="Subject / Message" required rows="8"></textarea>
+                            <label for="subject" class="sr-only">Subject and Message</label>
+                            <textarea id="subject" name="subject" placeholder="Subject / Message" required rows="8" aria-describedby="subject-error subject-help" autocomplete="off"></textarea>
+                            <span id="subject-help" class="form-help">Briefly describe your legal needs</span>
+                            <span id="subject-error" class="error-message" role="alert" aria-live="polite"></span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="form-checkbox">
-                    <input type="checkbox" id="agreement" name="agreement" required>
+                    <input type="checkbox" id="agreement" name="agreement" required aria-describedby="agreement-error">
                     <label for="agreement">By checking this box, I understand that this message does not constitute legal advice and does not create an attorney-client relationship with Turkett Law Office.</label>
+                    <span id="agreement-error" class="error-message" role="alert" aria-live="polite"></span>
                 </div>
                 
                 <!-- Honeypot field for spam prevention -->
-                <input type="text" name="website" id="website" style="position: absolute; left: -9999px; opacity: 0;" tabindex="-1" autocomplete="off">
+                <input type="text" name="website" id="website" style="position: absolute; left: -9999px; opacity: 0;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 
                 <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Send Message</button>
             </form>
@@ -5393,6 +5621,7 @@
 
         window.addEventListener('beforeunload', cleanupEventListeners);
         
+
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize enhanced scroll animation controller
             scrollAnimationController = new ScrollAnimationController();
@@ -5402,6 +5631,7 @@
             
             // Render blog posts
             renderBlogPosts();
+            
             
             // Initialize testimonials carousel
             initTestimonialsCarousel();
@@ -5463,13 +5693,6 @@
                         e.preventDefault();
                         smoothScroll(href);
                         
-                        // Close mobile menu if open with smooth transition
-                        const navMenu = document.getElementById('navMenu');
-                        if (navMenu.classList.contains('active')) {
-                            setTimeout(() => {
-                                toggleMobileMenu();
-                            }, 200); // Small delay for better UX
-                        }
                     }
                 };
                 addManagedEventListener(link, 'click', clickHandler);
@@ -5525,7 +5748,6 @@
 
                     // Spam check - if honeypot field is filled, it's likely spam
                     if (honeypot) {
-                        console.log('Spam attempt detected');
                         return; // Silently fail for spam
                     }
 
@@ -5556,7 +5778,6 @@
                     // Send email via EmailJS
                     emailjs.send('service_w24nfl6', 'template_ffx9l2s', templateParams)
                         .then(function(response) {
-                            console.log('SUCCESS!', response.status, response.text);
                             showFormMessage('Thank you for your message! We\'ll contact you within 24 hours.', 'success');
                             contactForm.reset();
                             submitBtn.disabled = true;
