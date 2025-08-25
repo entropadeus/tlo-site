@@ -57,6 +57,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     
+    <!-- EmailJS SDK for form submission -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <!-- JSON-LD Structured Data for GEO -->
     <script type="application/ld+json">
     {
@@ -2719,38 +2722,68 @@
             z-index: 1;
         }
 
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+        .testimonials-carousel {
+            position: relative;
+            overflow: hidden;
+            height: clamp(420px, 35vw, 500px);
             margin-bottom: 3rem;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        .testimonials-track {
+            display: flex;
+            will-change: transform;
+            transition: none;
+        }
+
+        .testimonials-carousel::before,
+        .testimonials-carousel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: clamp(200px, 25vw, 400px);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .testimonials-carousel::before {
+            left: 0;
+            background: linear-gradient(90deg, 
+                rgba(245, 243, 240, 1) 0%, 
+                rgba(245, 243, 240, 0.8) 40%, 
+                rgba(245, 243, 240, 0) 100%);
+        }
+
+        .testimonials-carousel::after {
+            right: 0;
+            background: linear-gradient(270deg, 
+                rgba(245, 243, 240, 1) 0%, 
+                rgba(245, 243, 240, 0.8) 40%, 
+                rgba(245, 243, 240, 0) 100%);
         }
 
         .testimonial-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
-            padding: 3rem;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
             border-radius: 20px;
             box-shadow: 
                 0 12px 40px rgba(38, 37, 31, 0.08),
                 inset 0 3px 15px rgba(255, 255, 255, 0.4);
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.8);
-            transition: all 1.0s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(0);
-            animation: fadeInUp 1.5s ease-out forwards;
+            width: clamp(300px, 28vw, 380px);
+            height: auto;
+            min-height: clamp(320px, 25vw, 420px);
+            margin-right: clamp(20px, 2vw, 50px);
+            flex-shrink: 0;
+            transform: translateZ(0);
+            display: flex;
+            flex-direction: column;
         }
 
-        .testimonial-card:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .testimonial-card:nth-child(3) {
-            animation-delay: 1.0s;
-            grid-column: 1 / -1;
-            max-width: 600px;
-            margin: 0 auto;
-        }
 
         .testimonial-card::before {
             content: '"';
@@ -2781,25 +2814,9 @@
             border-radius: 20px;
         }
 
-        .testimonial-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 20px 60px rgba(38, 37, 31, 0.12),
-                inset 0 4px 20px rgba(255, 255, 255, 0.5);
-            border-color: rgba(229, 172, 72, 0.3);
-        }
-
-        .testimonial-card:hover::before {
-            opacity: 0.2;
-            transform: scale(1.1);
-        }
-
-        .testimonial-card:hover::after {
-            opacity: 1;
-        }
 
         .testimonial-text {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             font-style: italic;
             position: relative;
             z-index: 2;
@@ -2807,15 +2824,17 @@
             line-height: 1.7;
             color: var(--neutral-mid);
             padding-left: 1rem;
+            flex: 1;
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
             position: relative;
             z-index: 2;
-            padding: 1.5rem 0;
+            margin-top: auto;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(229, 172, 72, 0.15);
         }
 
@@ -2836,12 +2855,6 @@
             box-shadow: 0 4px 15px rgba(38, 37, 31, 0.05);
         }
 
-        .testimonial-card:hover .author-avatar {
-            background: linear-gradient(135deg, var(--warm) 0%, #d49b3a 100%);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(229, 172, 72, 0.3);
-        }
 
         .author-info h5 {
             margin-bottom: 0.5rem;
@@ -3576,14 +3589,6 @@
                 text-align: center;
             }
 
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .testimonial-card {
-                padding: 2rem;
-            }
 
             .testimonial-text {
                 font-size: 1rem;
@@ -4189,53 +4194,139 @@
                 <h2>What Families Are Saying</h2>
                 <p>Real stories from real families I've had the privilege to serve.</p>
             </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Relocating to Texas, I needed a new attorney for estate planning. 
-                        Stephen's responsiveness and professionalism impressed me immediately. 
-                        The documents were exactly what I wanted. I now have a quality Texas 
-                        attorney I trust completely."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h5>Recent Client</h5>
-                            <p>Estate Planning</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Stephen helped me through one of the most difficult times in my life. 
-                        He guided me through creating a new will and probating my husband's estate. 
-                        His patience and expertise made everything so much easier."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h5>Grateful Client</h5>
-                            <p>Probate Services</p>
+            <div class="testimonials-carousel">
+                <div class="testimonials-track">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "Relocating to Texas, I needed a new attorney for estate planning. 
+                            Stephen's responsiveness and professionalism impressed me immediately. 
+                            The documents were exactly what I wanted. I now have a quality Texas 
+                            attorney I trust completely."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Recent Client</h5>
+                                <p>Estate Planning</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Mr. Turkett took the time to research and discover exactly how to 
-                        legally structure my estate as I wanted. His detailed communication 
-                        and extensive knowledge gave me and my family complete peace of mind."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "Stephen helped me through one of the most difficult times in my life. 
+                            He guided me through creating a new will and probating my husband's estate. 
+                            His patience and expertise made everything so much easier."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Grateful Client</h5>
+                                <p>Probate Services</p>
+                            </div>
                         </div>
-                        <div class="author-info">
-                            <h5>Satisfied Client</h5>
-                            <p>Complex Estate Planning</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "Mr. Turkett took the time to research and discover exactly how to 
+                            legally structure my estate as I wanted. His detailed communication 
+                            and extensive knowledge gave me and my family complete peace of mind."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Satisfied Client</h5>
+                                <p>Complex Estate Planning</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- First duplicate set for seamless looping -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "Relocating to Texas, I needed a new attorney for estate planning. 
+                            Stephen's responsiveness and professionalism impressed me immediately. 
+                            The documents were exactly what I wanted. I now have a quality Texas 
+                            attorney I trust completely."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Recent Client</h5>
+                                <p>Estate Planning</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "Stephen helped me through one of the most difficult times in my life. 
+                            He guided me through creating a new will and probating my husband's estate. 
+                            His patience and expertise made everything so much easier."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Grateful Client</h5>
+                                <p>Probate Services</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "Mr. Turkett took the time to research and discover exactly how to 
+                            legally structure my estate as I wanted. His detailed communication 
+                            and extensive knowledge gave me and my family complete peace of mind."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Satisfied Client</h5>
+                                <p>Complex Estate Planning</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Second duplicate set for extra padding -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "Relocating to Texas, I needed a new attorney for estate planning. 
+                            Stephen's responsiveness and professionalism impressed me immediately. 
+                            The documents were exactly what I wanted. I now have a quality Texas 
+                            attorney I trust completely."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Recent Client</h5>
+                                <p>Estate Planning</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            "Stephen helped me through one of the most difficult times in my life. 
+                            He guided me through creating a new will and probating my husband's estate. 
+                            His patience and expertise made everything so much easier."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Grateful Client</h5>
+                                <p>Probate Services</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4276,6 +4367,9 @@
                     <input type="checkbox" id="agreement" name="agreement" required>
                     <label for="agreement">By checking this box, I understand that this message does not constitute legal advice and does not create an attorney-client relationship with Turkett Law Office.</label>
                 </div>
+                
+                <!-- Honeypot field for spam prevention -->
+                <input type="text" name="website" id="website" style="position: absolute; left: -9999px; opacity: 0;" tabindex="-1" autocomplete="off">
                 
                 <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Send Message</button>
             </form>
@@ -5266,6 +5360,37 @@
         let scrollAnimationController;
         
         // Cleanup on page unload
+        // Perfect infinite testimonials carousel
+        function initTestimonialsCarousel() {
+            const track = document.querySelector('.testimonials-track');
+            if (!track) return;
+            
+            const cards = track.querySelectorAll('.testimonial-card');
+            if (cards.length === 0) return;
+            
+            // Calculate card width including margin
+            const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(cards[0]).marginRight);
+            const totalWidth = cardWidth * 3; // 3 original testimonials
+            
+            let position = 0;
+            const speed = 0.5; // pixels per frame
+            
+            function animate() {
+                position -= speed;
+                
+                // Reset when we've scrolled one full set (3 cards)
+                if (position <= -totalWidth) {
+                    position = 0;
+                }
+                
+                track.style.transform = `translateX(${position}px)`;
+                requestAnimationFrame(animate);
+            }
+            
+            // Start animation
+            requestAnimationFrame(animate);
+        }
+
         window.addEventListener('beforeunload', cleanupEventListeners);
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -5277,6 +5402,9 @@
             
             // Render blog posts
             renderBlogPosts();
+            
+            // Initialize testimonials carousel
+            initTestimonialsCarousel();
             
             // Set up scroll animations after a brief delay to ensure DOM is ready
             setTimeout(() => {
@@ -5379,7 +5507,10 @@
                 addManagedEventListener(agreementCheckbox, 'change', checkboxHandler);
             }
 
-            // Form submission handling
+            // Initialize EmailJS
+            emailjs.init('EC3NyKHK9ZHmShatK'); // Replace with your actual public key
+            
+            // Form submission handling with EmailJS
             if (contactForm) {
                 const formSubmitHandler = function(e) {
                     e.preventDefault();
@@ -5387,29 +5518,103 @@
                     // Basic form validation
                     const name = document.getElementById('name').value.trim();
                     const email = document.getElementById('email').value.trim();
+                    const phone = document.getElementById('phone').value.trim();
                     const subject = document.getElementById('subject').value.trim();
                     const isAgreed = document.getElementById('agreement').checked;
+                    const honeypot = document.getElementById('website').value;
+
+                    // Spam check - if honeypot field is filled, it's likely spam
+                    if (honeypot) {
+                        console.log('Spam attempt detected');
+                        return; // Silently fail for spam
+                    }
 
                     if (!name || !email || !subject || !isAgreed) {
-                        alert('Please fill in all required fields and check the agreement box.');
+                        showFormMessage('Please fill in all required fields and check the agreement box.', 'error');
                         return;
                     }
 
                     // Email validation
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     if (!emailRegex.test(email)) {
-                        alert('Please enter a valid email address.');
+                        showFormMessage('Please enter a valid email address.', 'error');
                         return;
                     }
 
-                    // Show success message (since this is frontend-only)
-                    alert('Thank you for your message! We will contact you soon.');
+                    // Show loading state
+                    setFormLoading(true);
                     
-                    // Reset form
-                    contactForm.reset();
-                    submitBtn.disabled = true;
+                    // Prepare email parameters
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        phone: phone || 'Not provided',
+                        message: subject,
+                        source_page: 'Main Contact Form'
+                    };
+
+                    // Send email via EmailJS
+                    emailjs.send('service_w24nfl6', 'template_ffx9l2s', templateParams)
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                            showFormMessage('Thank you for your message! We\'ll contact you within 24 hours.', 'success');
+                            contactForm.reset();
+                            submitBtn.disabled = true;
+                        })
+                        .catch(function(error) {
+                            console.error('FAILED...', error);
+                            showFormMessage('Sorry, there was an error sending your message. Please try again or call us directly.', 'error');
+                        })
+                        .finally(function() {
+                            setFormLoading(false);
+                        });
                 };
                 addManagedEventListener(contactForm, 'submit', formSubmitHandler);
+            }
+            
+            // Form UI helper functions
+            function showFormMessage(message, type) {
+                let messageDiv = document.getElementById('form-message');
+                if (!messageDiv) {
+                    messageDiv = document.createElement('div');
+                    messageDiv.id = 'form-message';
+                    messageDiv.style.cssText = `
+                        padding: 1rem;
+                        margin: 1rem 0;
+                        border-radius: 8px;
+                        text-align: center;
+                        font-weight: 500;
+                        transition: all 0.3s ease;
+                    `;
+                    contactForm.appendChild(messageDiv);
+                }
+                
+                messageDiv.textContent = message;
+                messageDiv.className = `form-message ${type}`;
+                
+                if (type === 'success') {
+                    messageDiv.style.cssText += 'background: #d4edda; color: #155724; border: 1px solid #c3e6cb;';
+                } else {
+                    messageDiv.style.cssText += 'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;';
+                }
+                
+                // Remove message after 5 seconds
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.remove();
+                    }
+                }, 5000);
+            }
+            
+            function setFormLoading(isLoading) {
+                const submitBtn = document.getElementById('submitBtn');
+                if (isLoading) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                } else {
+                    submitBtn.disabled = !document.getElementById('agreement').checked;
+                    submitBtn.innerHTML = 'Send Message';
+                }
             }
         });
     </script>

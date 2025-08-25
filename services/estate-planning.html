@@ -18,6 +18,9 @@
     <meta property="og:image" content="https://www.turkettlaw.com/images/Header.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
+    
+    <!-- EmailJS SDK for form submission -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         /* ===== IMPORTS ===== */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
@@ -1376,6 +1379,9 @@
                     <label for="agreement">By checking this box, I understand that this message does not constitute legal advice and does not create an attorney-client relationship with Turkett Law Office.</label>
                 </div>
                 
+                <!-- Honeypot field for spam prevention -->
+                <input type="text" name="website" id="website" style="position: absolute; left: -9999px; opacity: 0;" tabindex="-1" autocomplete="off">
+                
                 <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Send Message</button>
             </form>
         </div>
@@ -1494,7 +1500,10 @@
             handleHeaderScroll();
         }, 16); // 60fps
 
-        // Contact form functionality
+        // Initialize EmailJS
+        emailjs.init('YOUR_PUBLIC_KEY'); // Use same key as index.html
+        
+        // Contact form functionality with EmailJS
         function initContactForm() {
             const contactForm = document.getElementById('contactForm');
             const agreementCheckbox = document.getElementById('agreement');
@@ -1507,7 +1516,7 @@
                 });
             }
 
-            // Form submission handling
+            // Form submission handling with EmailJS
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -1517,26 +1526,96 @@
                     const email = document.getElementById('email').value.trim();
                     const subject = document.getElementById('subject').value.trim();
                     const isAgreed = document.getElementById('agreement').checked;
+                    const honeypot = document.getElementById('website').value;
+
+                    // Spam check
+                    if (honeypot) {
+                        console.log('Spam attempt detected');
+                        return;
+                    }
 
                     if (!name || !email || !subject || !isAgreed) {
-                        alert('Please fill in all required fields and check the agreement box.');
+                        showFormMessage('Please fill in all required fields and check the agreement box.', 'error');
                         return;
                     }
 
                     // Email validation
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     if (!emailRegex.test(email)) {
-                        alert('Please enter a valid email address.');
+                        showFormMessage('Please enter a valid email address.', 'error');
                         return;
                     }
 
-                    // Show success message (in real implementation, this would send to server)
-                    alert('Thank you for your message! We will get back to you soon.');
+                    // Show loading state
+                    setFormLoading(true);
                     
-                    // Reset form
-                    contactForm.reset();
-                    submitBtn.disabled = true;
+                    // Prepare email parameters
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        phone: 'Not provided',
+                        message: subject,
+                        source_page: 'Estate Planning Service Page'
+                    };
+
+                    // Send email via EmailJS
+                    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                        .then(function(response) {
+                            showFormMessage('Thank you for your message! We\'ll contact you within 24 hours.', 'success');
+                            contactForm.reset();
+                            submitBtn.disabled = true;
+                        })
+                        .catch(function(error) {
+                            console.error('FAILED...', error);
+                            showFormMessage('Sorry, there was an error sending your message. Please try again or call us directly.', 'error');
+                        })
+                        .finally(function() {
+                            setFormLoading(false);
+                        });
                 });
+            }
+        }
+        
+        // Form UI helper functions
+        function showFormMessage(message, type) {
+            const contactForm = document.getElementById('contactForm');
+            let messageDiv = document.getElementById('form-message');
+            if (!messageDiv) {
+                messageDiv = document.createElement('div');
+                messageDiv.id = 'form-message';
+                messageDiv.style.cssText = `
+                    padding: 1rem;
+                    margin: 1rem 0;
+                    border-radius: 8px;
+                    text-align: center;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+                `;
+                contactForm.appendChild(messageDiv);
+            }
+            
+            messageDiv.textContent = message;
+            if (type === 'success') {
+                messageDiv.style.cssText += 'background: #d4edda; color: #155724; border: 1px solid #c3e6cb;';
+            } else {
+                messageDiv.style.cssText += 'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;';
+            }
+            
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        function setFormLoading(isLoading) {
+            const submitBtn = document.getElementById('submitBtn');
+            if (isLoading) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            } else {
+                submitBtn.disabled = !document.getElementById('agreement').checked;
+                submitBtn.innerHTML = 'Send Message';
             }
         }
 
