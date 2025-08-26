@@ -383,7 +383,6 @@
             /* Typography */
             --font-heading: 'Cormorant Garamond', Georgia, serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-weight-bold: 700;
             
             /* Fluid Typography Scale */
@@ -1316,9 +1315,8 @@
                     rgba(229, 172, 72, 0.3) 30%,
                     transparent 70%
                 );
-            opacity: 0.08;
-            border-radius: 50%;
             opacity: 0.05;
+            border-radius: 50%;
         }
 
         .hero-content {
@@ -1402,12 +1400,48 @@
             animation: fadeInUp 2.5s ease-out 0.8s both;
         }
 
+        /* ===== BUTTON STYLES ===== */
+        /* Base button styles */
+        .btn-outline, .btn-primary, .btn-white, .nav-cta {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 28px;
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-family: var(--font-body);
+            letter-spacing: 0.3px;
+        }
 
         .btn-outline {
             background: rgba(255, 255, 255, 0.9);
             color: var(--primary);
             border: 2px solid var(--primary);
             box-shadow: 0 2px 8px rgba(69, 72, 55, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--warm) 0%, #d49b3a 100%);
+            color: white;
+            border: 2px solid var(--warm);
+            box-shadow: 0 4px 15px rgba(229, 172, 72, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #f0c674 0%, var(--warm) 100%);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(229, 172, 72, 0.4),
+                0 4px 12px rgba(229, 172, 72, 0.2);
+            border-color: #f0c674;
         }
 
         .btn-outline:hover {
@@ -3402,27 +3436,6 @@
                 font-size: 0.95rem;
                 border-radius: 24px;
                 min-height: 44px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                font-weight: 600;
-                text-decoration: none;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                border: 2px solid transparent;
-            }
-            
-            .btn-outline {
-                background: rgba(255, 255, 255, 0.9);
-                color: var(--primary);
-                border-color: var(--primary);
-            }
-            
-            .btn-primary {
-                background: linear-gradient(135deg, var(--warm) 0%, #d49b3a 100%);
-                color: white;
-                border-color: var(--warm);
             }
             
             .nav-cta {
@@ -4203,7 +4216,7 @@
                         I've been there personally, and I'm here to guide you through life.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#services" class="btn btn-outline">Explore Services</a>
+                        <a href="#services" class="btn-outline">Explore Services</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -4400,7 +4413,7 @@
             <div class="blog-modal-footer">
                 <h3>Need Legal Guidance?</h3>
                 <p>If you have questions about this topic or need help with your estate planning, I'm here to help.</p>
-                <a href="#contact" class="btn btn-primary" onclick="closeBlogPost()">Schedule a Consultation</a>
+                <a href="#contact" class="btn-primary" onclick="closeBlogPost()">Schedule a Consultation</a>
             </div>
         </div>
     </div>
@@ -4599,7 +4612,7 @@
                 <!-- Honeypot field for spam prevention -->
                 <input type="text" name="website" id="website" style="position: absolute; left: -9999px; opacity: 0;" tabindex="-1" autocomplete="off" aria-hidden="true">
                 
-                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Send Message</button>
+                <button type="submit" class="btn-primary" id="submitBtn" disabled>Send Message</button>
             </form>
         </div>
     </section>
