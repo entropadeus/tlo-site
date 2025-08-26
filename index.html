@@ -751,6 +751,15 @@
             }
         }
 
+        @keyframes liquidShimmer {
+            0% {
+                background-position: -300% center;
+            }
+            100% {
+                background-position: 300% center;
+            }
+        }
+
         @keyframes gentlePulse {
             0%, 100% {
                 transform: scale(1);
@@ -1351,15 +1360,18 @@
             background: linear-gradient(
                 120deg,
                 var(--warm) 0%,
-                #f0c674 25%,
-                var(--warm) 50%,
-                #e09842 75%,
+                rgba(240, 199, 116, 0.7) 15%,
+                rgba(255, 255, 255, 0.9) 30%,
+                rgba(240, 199, 116, 0.8) 45%,
+                var(--warm) 60%,
+                rgba(224, 152, 66, 0.7) 75%,
                 var(--warm) 100%
             );
-            background-size: 200% 100%;
+            background-size: 300% 100%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: liquidShimmer 15s linear infinite;
         }
 
         .hero-text h1 .highlight::after {
@@ -4238,11 +4250,11 @@
                         Helping Texas families protect their futures for over 25 years.</p>
                         <div class="hero-stats">
                             <div class="stat">
-                                <span class="stat-number" data-target="25">0</span>+
+                                <span class="stat-number" data-target="25">0</span>
                                 <span class="stat-label">Years Experience</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-number" data-target="500">0</span>+
+                                <span class="stat-number" data-target="500">0</span>
                                 <span class="stat-label">Families Helped</span>
                             </div>
                         </div>
