@@ -51,13 +51,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+
+    <!-- Preload Google Fonts stylesheet and apply non-blocking -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap">
+    </noscript>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <!-- EmailJS SDK for form submission -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- EmailJS SDK for form submission (deferred) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <!-- JSON-LD Structured Data for GEO -->
     <script type="application/ld+json">
@@ -332,7 +340,7 @@
     
     <style>
         /* ===== IMPORTS ===== */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+        /* Fonts loaded via <link rel="preload stylesheet"> in <head> for better performance */
         
         /* ===== LAZY LOADING STYLES ===== */
         [data-bg] {
@@ -4195,7 +4203,7 @@
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#home" class="logo">
-                <img src="images/Header.png" alt="Turkett Law Office" class="logo-image" loading="lazy" decoding="async">
+                <img src="images/Header.png" alt="Turkett Law Office" class="logo-image" fetchpriority="high" decoding="async" width="2388" height="723">
             </a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#services" class="nav-link">Services</a></li>
@@ -4236,7 +4244,7 @@
                         <div class="hero-card-header">
                             <!-- Try to load image first, fallback to icon if image doesn't exist -->
                             <img src="images/stephen-turkett.jpg" alt="Stephen Turkett, Estate Planning Attorney" class="attorney-photo" 
-                                 loading="lazy" decoding="async"
+                                 loading="lazy" decoding="async" width="412" height="533"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="fallback-icon" style="display: none;">
                                 <i class="fas fa-balance-scale"></i>
@@ -4274,7 +4282,7 @@
             </div>
             <div class="services-grid">
                 <a href="services/elder-law.html" class="service-card-link">
-                    <div class="service-card with-bg-image" style="background-image: url('images/Nursing Home.jpg');">
+                    <div class="service-card with-bg-image" data-bg="images/Nursing Home.jpg">
                         <div class="service-icon">
                             <i class="fas fa-hands-helping"></i>
                         </div>
@@ -4284,7 +4292,7 @@
                     </div>
                 </a>
                 <a href="services/estate-planning.html" class="service-card-link">
-                    <div class="service-card with-bg-image" style="background-image: url('images/twoadultwomen.jpg');">
+                    <div class="service-card with-bg-image" data-bg="images/twoadultwomen.jpg">
                         <div class="service-icon">
                             <i class="fas fa-file-alt"></i>
                         </div>
@@ -4294,7 +4302,7 @@
                     </div>
                 </a>
                 <a href="services/probate.html" class="service-card-link">
-                    <div class="service-card with-bg-image" style="background-image: url('images/1_-_Fort_Worth_Exterior.jpg');">
+                    <div class="service-card with-bg-image" data-bg="images/1_-_Fort_Worth_Exterior.jpg">
                         <div class="service-icon">
                             <i class="fas fa-gavel"></i>
                         </div>
@@ -4305,7 +4313,7 @@
                     </div>
                 </a>
                 <a href="services/guardianships.html" class="service-card-link">
-                    <div class="service-card with-bg-image" style="background-image: url('images/grandparents5.jpg');">
+                    <div class="service-card with-bg-image" data-bg="images/grandparents5.jpg">
                         <div class="service-icon">
                             <i class="fas fa-user-shield"></i>
                         </div>
@@ -4316,7 +4324,7 @@
                     </div>
                 </a>
                 <a href="services/divorce-custody.html" class="service-card-link">
-                    <div class="service-card with-bg-image" style="background-image: url('images/stock-photo-hiking-in-the-woods-1539803420 cropped.jpg');">
+                    <div class="service-card with-bg-image" data-bg="images/stock-photo-hiking-in-the-woods-1539803420 cropped.jpg">
                         <div class="service-icon">
                             <i class="fas fa-heart"></i>
                         </div>
@@ -4325,7 +4333,7 @@
                     </div>
                 </a>
                 <a href="services/business-real-estate.html" class="service-card-link">
-                    <div class="service-card with-bg-image" style="background-image: url('images/1_-_Fort_Worth_Exterior.jpg');">
+                    <div class="service-card with-bg-image" data-bg="images/1_-_Fort_Worth_Exterior.jpg">
                         <div class="service-icon">
                             <i class="fas fa-briefcase"></i>
                         </div>
@@ -4373,7 +4381,7 @@
                     <div class="story-photo">
                         <!-- Try to load image first, fallback to icon if image doesn't exist -->
                         <img src="images/stephen-turkett.jpg" alt="Stephen Turkett, Estate Planning Attorney" class="attorney-photo-large" 
-                             loading="lazy" decoding="async"
+                             loading="lazy" decoding="async" width="412" height="533"
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="fallback-icon-large" style="display: none;">
                             <i class="fas fa-user-tie"></i>
