@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -587,23 +587,32 @@
             }
         }
     </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
+ </head>
+ <body>
+     <!-- Header -->
+     <div class="scroll-progress">
+         <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+     </div>
+     <header class="header" id="header">
         <nav class="nav container">
-            <a href="../index.html" class="logo">
-                <img src="../images/Header.png" alt="Turkett Law Office" class="logo-image" fetchpriority="high" decoding="async" width="2388" height="723">
+            <a href="/#home" class="logo">
+                <img src="/images/Header.png" alt="Turkett Law Office" class="logo-image" fetchpriority="high" decoding="async" width="2388" height="723">
             </a>
-            <ul class="nav-menu">
-                <li><a href="../index.html#services" class="nav-link">Services</a></li>
-                <li><a href="../index.html#about" class="nav-link">About Stephen</a></li>
-                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
-                <li><a href="../index.html#testimonials" class="nav-link">Reviews</a></li>
-                <li><a href="tel:8177692750" class="nav-cta">Schedule Consultation</a></li>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/#services" class="nav-link">Services</a></li>
+                <li><a href="/#about" class="nav-link">About Stephen</a></li>
+                <li><a href="/#blog" class="nav-link">Blog</a></li>
+                <li><a href="/#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="/#contact" class="nav-cta">Schedule Consultation</a></li>
             </ul>
         </nav>
     </header>
+
+     <!-- Floating CTA Button -->
+     <a href="../index.html#contact" class="floating-cta" id="floatingCta">
+         <i class="fas fa-calendar-alt icon"></i>
+         Schedule Consultation
+     </a>
 
     <!-- Blog Article -->
     <main class="blog-article">
@@ -618,7 +627,7 @@
                 <p class="article-excerpt">
                     New legislative updates and court decisions are reshaping estate planning in Texas. Here's what changed this year and how it affects your family's planning strategy.
                 </p>
-            </header>
+            </header>`n`n    <!-- Floating CTA Button -->`n    <a href="../index.html#contact" class="floating-cta" id="floatingCta">`n        <i class="fas fa-calendar-alt icon"></i>`n        Schedule Consultation`n    </a>
 
             <article class="article-content">
                 <p>As we're halfway through 2025, several significant changes to Texas estate planning law have taken effect that could impact your family's planning strategy. Whether you have an existing estate plan or are just getting started, these updates deserve your attention.</p>
@@ -671,7 +680,7 @@
                 </ul>
                 
                 <blockquote>
-                "The law isn't static—it evolves with society's needs. What worked for your family's estate plan five years ago might need updates to remain effective and take advantage of new opportunities."
+                "The law isn't staticâ€”it evolves with society's needs. What worked for your family's estate plan five years ago might need updates to remain effective and take advantage of new opportunities."
                 </blockquote>
                 
                 <h3>6. Business Succession Planning Updates</h3>
@@ -773,9 +782,26 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 Turkett Law Office. All rights reserved. | 
                 Attorney advertising. Prior results do not guarantee similar outcomes. | 
-                Based on content © Google, used under CC BY 4.0.</p>
+                Based on content Â© Google, used under CC BY 4.0.</p>
             </div>
         </div>
     </footer>
-</body>
-</html>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Reading Progress -->
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <script>
+      function throttle(fn, limit){ let inThrottle;return function(){const c=this,a=arguments;if(!inThrottle){fn.apply(c,a);inThrottle=true;setTimeout(()=>inThrottle=false,limit)}} }
+      function handleHeaderScroll(){ const h=document.getElementById('header'); const b=document.getElementById('scrollProgressBar'); const cta=document.getElementById('floatingCta'); const y=window.pageYOffset||document.documentElement.scrollTop; const H=document.documentElement.scrollHeight-document.documentElement.clientHeight; const p=H>0?(y/H)*100:0; if(h){ y>100?h.classList.add('scrolled'):h.classList.remove('scrolled'); } if(b){ b.style.width=p+'%'; } if(cta){ y>500?cta.classList.add('visible'):cta.classList.remove('visible'); } }
+      function updateReadingProgress(){ const el=document.getElementById('readingProgress'); if(!el)return; const y=document.body.scrollTop||document.documentElement.scrollTop; const H=document.documentElement.scrollHeight-document.documentElement.clientHeight; el.style.width=((H>0?(y/H)*100:0))+'%'; }
+      function updateScrollToTop(){ const btn=document.getElementById('scrollToTop'); if(!btn)return; const y=window.scrollY; y>800?btn.classList.add('visible'):btn.classList.remove('visible'); }
+      document.addEventListener('DOMContentLoaded',function(){ const onScroll=throttle(function(){ handleHeaderScroll(); updateReadingProgress(); updateScrollToTop(); },16); window.addEventListener('scroll',onScroll,{passive:true}); const btn=document.getElementById('scrollToTop'); if(btn){ btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'})); } document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){ const id=this.getAttribute('href'); if(id&&id.startsWith('#')){ e.preventDefault(); const t=document.querySelector(id); if(t){ t.scrollIntoView({behavior:'smooth'}); } } })); handleHeaderScroll(); updateReadingProgress(); updateScrollToTop(); });
+    </script>
+ </body>
+ </html>
+

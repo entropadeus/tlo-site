@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -587,23 +587,32 @@
             }
         }
     </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
+ </head>
+ <body>
+     <!-- Header -->
+     <div class="scroll-progress">
+         <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+     </div>
+     <header class="header" id="header">
         <nav class="nav container">
             <a href="../index.html" class="logo">
                 <img src="../images/Header.png" alt="Turkett Law Office" class="logo-image" fetchpriority="high" decoding="async" width="2388" height="723">
             </a>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="../index.html#services" class="nav-link">Services</a></li>
                 <li><a href="../index.html#about" class="nav-link">About Stephen</a></li>
                 <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
                 <li><a href="../index.html#testimonials" class="nav-link">Reviews</a></li>
-                <li><a href="tel:8177692750" class="nav-cta">Schedule Consultation</a></li>
+                <li><a href="../index.html#contact" class="nav-cta">Schedule Consultation</a></li>
             </ul>
         </nav>
-    </header>
+     </header>
+
+     <!-- Floating CTA Button -->
+     <a href="../index.html#contact" class="floating-cta" id="floatingCta">
+         <i class="fas fa-calendar-alt icon"></i>
+         Schedule Consultation
+     </a>
 
     <!-- Blog Article -->
     <main class="blog-article">
@@ -618,7 +627,7 @@
                 <p class="article-excerpt">
                     You've named guardians for your kids, but have you made this critical error? One oversight could leave your children's inheritance tied up in court for months.
                 </p>
-            </header>
+            </header>`n`n    <!-- Floating CTA Button -->`n    <a href="../index.html#contact" class="floating-cta" id="floatingCta">`n        <i class="fas fa-calendar-alt icon"></i>`n        Schedule Consultation`n    </a>
 
             <article class="article-content">
                 <p>You did the responsible thing. You created a will, named guardians for your children, and felt that sense of relief knowing you'd protected your family. But if you're like 70% of Texas parents, you've made a critical mistake that could cost your children thousands of dollars and months of court proceedings.</p>
@@ -631,7 +640,7 @@
                     <li>Annual accountings and bonds are required</li>
                     <li>Every significant expense needs court approval</li>
                     <li>Legal fees can consume 3-5% of the estate annually</li>
-                    <li>When your child turns 18, they receive everything outright—ready or not</li>
+                    <li>When your child turns 18, they receive everything outrightâ€”ready or not</li>
                 </ul>
                 
                 <h3>Real-Life Scenario</h3>
@@ -641,7 +650,7 @@
                     <li>The guardian had to petition the court to access funds for the children's needs</li>
                     <li>Private school tuition required court approval each semester</li>
                     <li>Medical expenses beyond routine care needed documentation</li>
-                    <li>The eldest received $166,666 on his 18th birthday—and spent it within two years</li>
+                    <li>The eldest received $166,666 on his 18th birthdayâ€”and spent it within two years</li>
                 </ul>
                 
                 <h3>The Solution: Testamentary Trusts</h3>
@@ -668,7 +677,7 @@
                 If you own a home and have life insurance, you have enough to justify a trust. The cost of not having one far exceeds the cost of setting one up.</p>
                 
                 <p><strong>"I trust my kids to be responsible"</strong><br>
-                It's not about trust—it's about protection. An 18-year-old with a large inheritance faces pressures you can't imagine: "friends" with business ideas, predatory lenders, and their own inexperience.</p>
+                It's not about trustâ€”it's about protection. An 18-year-old with a large inheritance faces pressures you can't imagine: "friends" with business ideas, predatory lenders, and their own inexperience.</p>
                 
                 <p><strong>"It's too complicated"</strong><br>
                 A testamentary trust adds just a few pages to your will but provides decades of protection. Your attorney handles the complexity; you just make the big decisions.</p>
@@ -691,7 +700,7 @@
                 <p>Statistics show that lottery winners under 25 are broke within five years 70% of the time. Why would an inheritance be different? By structuring distributions over time, you give your children the gift of maturity and financial education before they receive large sums.</p>
                 
                 <h3>Take Action Today</h3>
-                <p>If your will leaves assets directly to minor children, you're not alone—but you are at risk. The fix is straightforward:</p>
+                <p>If your will leaves assets directly to minor children, you're not aloneâ€”but you are at risk. The fix is straightforward:</p>
                 
                 <ol>
                     <li>Review your current will</li>
@@ -700,7 +709,7 @@
                     <li>Sleep better knowing you've truly protected your children</li>
                 </ol>
                 
-                <p>Your children deserve more than money—they deserve the wisdom and protection that comes with proper planning. Don't let a preventable mistake turn your legacy into a legal nightmare.</p>
+                <p>Your children deserve more than moneyâ€”they deserve the wisdom and protection that comes with proper planning. Don't let a preventable mistake turn your legacy into a legal nightmare.</p>
             </article>
 
             <nav class="article-navigation">
@@ -757,9 +766,26 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 Turkett Law Office. All rights reserved. | 
                 Attorney advertising. Prior results do not guarantee similar outcomes. | 
-                Based on content © Google, used under CC BY 4.0.</p>
+                Based on content Â© Google, used under CC BY 4.0.</p>
             </div>
         </div>
     </footer>
-</body>
-</html>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Reading Progress -->
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <script>
+      function throttle(fn, limit){ let inThrottle;return function(){const c=this,a=arguments;if(!inThrottle){fn.apply(c,a);inThrottle=true;setTimeout(()=>inThrottle=false,limit)}} }
+      function handleHeaderScroll(){ const h=document.getElementById('header'); const b=document.getElementById('scrollProgressBar'); const cta=document.getElementById('floatingCta'); const y=window.pageYOffset||document.documentElement.scrollTop; const H=document.documentElement.scrollHeight-document.documentElement.clientHeight; const p=H>0?(y/H)*100:0; if(h){ y>100?h.classList.add('scrolled'):h.classList.remove('scrolled'); } if(b){ b.style.width=p+'%'; } if(cta){ y>500?cta.classList.add('visible'):cta.classList.remove('visible'); } }
+      function updateReadingProgress(){ const el=document.getElementById('readingProgress'); if(!el)return; const y=document.body.scrollTop||document.documentElement.scrollTop; const H=document.documentElement.scrollHeight-document.documentElement.clientHeight; el.style.width=((H>0?(y/H)*100:0))+'%'; }
+      function updateScrollToTop(){ const btn=document.getElementById('scrollToTop'); if(!btn)return; const y=window.scrollY; y>800?btn.classList.add('visible'):btn.classList.remove('visible'); }
+      document.addEventListener('DOMContentLoaded',function(){ const onScroll=throttle(function(){ handleHeaderScroll(); updateReadingProgress(); updateScrollToTop(); },16); window.addEventListener('scroll',onScroll,{passive:true}); const btn=document.getElementById('scrollToTop'); if(btn){ btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'})); } document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){ const id=this.getAttribute('href'); if(id&&id.startsWith('#')){ e.preventDefault(); const t=document.querySelector(id); if(t){ t.scrollIntoView({behavior:'smooth'}); } } })); handleHeaderScroll(); updateReadingProgress(); updateScrollToTop(); });
+    </script>
+ </body>
+ </html>
+
