@@ -12,11 +12,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turkett Law Office | Estate Planning for Texas Families</title>
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Load fonts with reduced weights -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* ===== IMPORTS ===== */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
-        
         /* ===== CSS CUSTOM PROPERTIES ===== */
         :root {
             /* Brand Colors */
@@ -546,7 +548,38 @@
             left: 100%;
         }
 
+        /* Hamburger Menu Toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
 
+        .hamburger-line {
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
 
         /* Floating CTA Button */
         .floating-cta {
@@ -698,7 +731,7 @@
                 radial-gradient(ellipse 120% 80% at 75% 15%, rgba(229, 172, 72, 0.12) 0%, transparent 50%),
                 radial-gradient(ellipse 100% 60% at 10% 90%, rgba(38, 37, 31, 0.06) 0%, transparent 40%),
                 radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 70%),
-                url('images/family-trees.png') center/cover no-repeat;
+                url('images/family-trees.jpg') center/cover no-repeat;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -2857,22 +2890,35 @@
 
             .nav {
                 justify-content: center;
+                position: relative;
             }
 
             .logo {
                 margin: 0 auto;
             }
 
+            .nav-toggle {
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
             /* Hero section mobile styles */
             .hero {
-                padding: 6rem 0 4rem;
-                min-height: calc(100vh - 70px);
+                padding: 5rem 0 3rem;
+                min-height: auto;
                 background-attachment: scroll;
             }
 
             .hero-content {
-                gap: 3rem;
+                gap: 2.5rem;
                 min-height: auto;
+            }
+
+            .hero-buttons {
+                margin-top: 1.5rem;
             }
 
             .hero-card {
@@ -3201,9 +3247,9 @@
                 --text-4xl: clamp(1.75rem, 4vw, 2rem);
                 --text-3xl: clamp(1.5rem, 3vw, 1.75rem);
             }
-            
+
             .hero {
-                padding: 5rem 0 3rem;
+                padding: 4.5rem 0 2.5rem;
             }
             
             .hero-card {
@@ -3417,6 +3463,11 @@
             <a href="#home" class="logo">
                 <img src="images/Header.png" alt="Turkett Law Office" class="logo-image">
             </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#about" class="nav-link">About Stephen</a></li>
@@ -4512,10 +4563,34 @@
             }
         }
 
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+
+                // Update aria-expanded for accessibility
+                const isExpanded = navMenu.classList.contains('active');
+                navToggle.setAttribute('aria-expanded', isExpanded);
+
+                // Prevent body scroll when menu is open
+                document.body.style.overflow = isExpanded ? 'hidden' : '';
+            }
+        }
+
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Render blog posts
             renderBlogPosts();
+
+            // Hamburger menu toggle
+            const navToggle = document.getElementById('navToggle');
+            if (navToggle) {
+                navToggle.addEventListener('click', toggleMobileMenu);
+            }
             
             // Add scroll listener for header and new features with throttling
             let ticking = false;
