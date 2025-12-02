@@ -30,10 +30,13 @@
     <meta property="twitter:description" content="The 18th birthday is different when your child has special needs. Here's what Texas parents need to know about guardianships, alternatives, and protecting your adult child's future.">
     <meta property="twitter:image" content="../images/bigstock-Happy-special needs Girl-With-Sisters-42892417.jpg">
 
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         /* ===== IMPORTS ===== */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
         
         /* ===== CSS CUSTOM PROPERTIES ===== */
         :root {
@@ -277,6 +280,39 @@
             background: rgba(212, 154, 53, 0.95);
             transform: translateY(-2px);
             box-shadow: 0 10px 32px rgba(229, 172, 72, 0.5);
+        }
+
+        /* Hamburger Menu Toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger-line {
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         /* ===== BLOG ARTICLE LAYOUT ===== */
@@ -574,8 +610,42 @@
 
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 768px) {
+            .logo {
+                margin: 0 auto;
+            }
+
+            .nav {
+                position: relative;
+            }
+
+            .nav-toggle {
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
             .nav-menu {
-                display: none;
+                position: fixed;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                gap: 1rem;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
             }
             
             .article-container {
@@ -616,7 +686,12 @@
             <a href="../index.html" class="logo">
                 <img src="../images/Header.png" alt="Turkett Law Office" class="logo-image">
             </a>
-            <ul class="nav-menu">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="../index.html#services" class="nav-link">Services</a></li>
                 <li><a href="../index.html#about" class="nav-link">About Stephen</a></li>
                 <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
@@ -758,5 +833,24 @@
             </div>
         </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    const isExpanded = navMenu.classList.contains('active');
+                    this.setAttribute('aria-expanded', isExpanded);
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

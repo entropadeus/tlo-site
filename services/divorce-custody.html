@@ -1261,13 +1261,30 @@
             handleHeaderScroll();
         }, 16); // 60fps
 
+        // Mobile menu toggle
+        function initMobileMenu() {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    const isExpanded = navMenu.classList.contains('active');
+                    this.setAttribute('aria-expanded', isExpanded);
+                    document.body.style.overflow = isExpanded ? 'hidden' : '';
+                });
+            }
+        }
+
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initSmoothScrolling();
-            
+            initMobileMenu();
+
             // Add scroll event listener
             window.addEventListener('scroll', handleScroll);
-            
+
             // Initial header state
             handleHeaderScroll();
         });
