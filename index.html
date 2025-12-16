@@ -445,32 +445,6 @@
             border-bottom: 1px solid rgba(229, 172, 72, 0.15);
         }
 
-        /* Scroll Progress Indicator */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: transparent;
-            z-index: 1001;
-            pointer-events: none;
-        }
-
-        .scroll-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--warm) 0%, var(--warm-light) 50%, var(--warm) 100%);
-            background-size: 200% 100%;
-            width: 0%;
-            transition: width 0.1s ease-out;
-            animation: shimmer 2s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
         .nav {
             display: flex;
             justify-content: space-between;
@@ -4477,7 +4451,6 @@
             .scroll-top,
             .nav-toggle,
             .grain-overlay,
-            .scroll-progress,
             .reading-progress,
             .hero-pattern,
             .nav-backdrop,
@@ -4768,12 +4741,6 @@
 
     <!-- Grain Texture Overlay for depth -->
     <div class="grain-overlay" aria-hidden="true"></div>
-
-    <!-- Skip Navigation -->
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-progress">
-        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
-    </div>
 
     <!-- Header -->
     <header class="header" id="header">
@@ -5305,11 +5272,6 @@
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
     </button>
-
-    <!-- Reading Progress -->
-    <div class="reading-progress" id="readingProgress"></div>
-
-    <!-- Skip Navigation -->
 
     <script>
         // Performance and UI Enhancement JavaScript
@@ -6028,28 +5990,20 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Enhanced header scroll effect with progress indicator and floating CTA
+        // Enhanced header scroll effect and floating CTA
         function handleHeaderScroll() {
             const header = document.getElementById('header');
-            const scrollProgressBar = document.getElementById('scrollProgressBar');
             const floatingCta = document.getElementById('floatingCta');
-            
+
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = (scrollTop / documentHeight) * 100;
-            
+
             // Header scroll effects
             if (scrollTop > 100) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
-            
-            // Update scroll progress indicator
-            if (scrollProgressBar) {
-                scrollProgressBar.style.width = scrollPercent + '%';
-            }
-            
+
             // Show/hide floating CTA based on scroll position
             if (floatingCta) {
                 if (scrollTop > 500) {
