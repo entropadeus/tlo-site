@@ -4153,6 +4153,611 @@
                 padding-right: 2.5rem;
             }
         }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PROFESSIONAL POLISH ENHANCEMENTS
+           Refined micro-interactions and visual sophistication
+        ═══════════════════════════════════════════════════════════════ */
+
+        /* ===== SCROLL-TRIGGERED ANIMATIONS ===== */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Staggered animation delays for grid items */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* ===== ENHANCED FOCUS STATES (Accessibility) ===== */
+        *:focus-visible {
+            outline: 3px solid var(--warm);
+            outline-offset: 3px;
+            border-radius: 4px;
+            transition: outline-offset 0.2s ease;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--warm);
+            outline-offset: 4px;
+        }
+
+        .btn:focus-visible {
+            outline-offset: 5px;
+            box-shadow: 0 0 0 4px rgba(229, 172, 72, 0.3);
+        }
+
+        .nav-link:focus-visible {
+            outline-offset: 2px;
+            background: rgba(229, 172, 72, 0.1);
+        }
+
+        /* Skip focus ring on mouse click */
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* ===== ELEGANT SECTION DIVIDERS ===== */
+        .section-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
+            margin: 0;
+            background: transparent;
+        }
+
+        .section-divider-wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section-divider-wave svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section-divider-wave path {
+            fill: var(--bg-cream);
+        }
+
+        .section-divider--inverted .section-divider-wave path {
+            fill: white;
+        }
+
+        /* Angular divider variant */
+        .section-divider-angle {
+            position: relative;
+            height: 60px;
+            overflow: hidden;
+        }
+
+        .section-divider-angle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            background: var(--bg-cream);
+            clip-path: polygon(0 100%, 100% 0, 100% 100%);
+        }
+
+        .section-divider-angle--left::before {
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+        }
+
+        /* ===== SUBTLE GRAIN TEXTURE OVERLAY ===== */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* ===== CUSTOM TEXT SELECTION ===== */
+        ::selection {
+            background: rgba(229, 172, 72, 0.25);
+            color: var(--primary);
+        }
+
+        ::-moz-selection {
+            background: rgba(229, 172, 72, 0.25);
+            color: var(--primary);
+        }
+
+        /* ===== FIRST-LETTER TREATMENTS ===== */
+        .story-text > p:first-of-type::first-letter,
+        .blog-modal-body > p:first-of-type::first-letter {
+            font-family: var(--font-heading);
+            font-size: 3.5em;
+            float: left;
+            line-height: 0.8;
+            margin: 0.1em 0.15em 0 0;
+            color: var(--warm);
+            font-weight: 600;
+        }
+
+        /* ===== ENHANCED SCROLL-TO-TOP BUTTON ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(229, 172, 72, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 998;
+            box-shadow: 0 4px 20px rgba(38, 37, 31, 0.1);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .scroll-top:hover {
+            background: var(--warm);
+            border-color: var(--warm);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(229, 172, 72, 0.35);
+        }
+
+        .scroll-top:hover i {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .scroll-top:active {
+            transform: scale(0.9);
+            transition-duration: 0.1s;
+        }
+
+        .scroll-top i {
+            font-size: 1.1rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Progress ring around scroll-top button */
+        .scroll-top-progress {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--warm) var(--scroll-progress, 0%),
+                transparent var(--scroll-progress, 0%)
+            );
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-top:hover .scroll-top-progress {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-top {
+                bottom: 20px;
+                left: 20px;
+                width: 44px;
+                height: 44px;
+            }
+
+            .scroll-top-progress {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        /* ===== IMAGE LOADING SKELETON ===== */
+        .skeleton {
+            background: linear-gradient(
+                90deg,
+                rgba(229, 172, 72, 0.08) 0%,
+                rgba(229, 172, 72, 0.15) 50%,
+                rgba(229, 172, 72, 0.08) 100%
+            );
+            background-size: 200% 100%;
+            animation: skeleton-shimmer 1.5s ease-in-out infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes skeleton-shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .img-loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img-loading::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(229, 172, 72, 0.1) 0%,
+                rgba(229, 172, 72, 0.2) 50%,
+                rgba(229, 172, 72, 0.1) 100%
+            );
+            background-size: 200% 100%;
+            animation: skeleton-shimmer 1.5s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .img-loading.loaded::before {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            /* Hide non-essential elements */
+            .header,
+            .floating-cta,
+            .scroll-top,
+            .nav-toggle,
+            .grain-overlay,
+            .scroll-progress,
+            .reading-progress,
+            .hero-pattern,
+            .nav-backdrop,
+            .blog-modal {
+                display: none !important;
+            }
+
+            /* Reset backgrounds */
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 12pt;
+            }
+
+            /* Ensure text is readable */
+            * {
+                color: black !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+
+            /* Page breaks */
+            h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            p, blockquote, ul, ol {
+                orphans: 3;
+                widows: 3;
+            }
+
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid;
+            }
+
+            /* Show link URLs */
+            a[href]:after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                color: #666;
+            }
+
+            a[href^="#"]:after,
+            a[href^="javascript:"]:after,
+            a[href^="tel:"]:after {
+                content: "";
+            }
+
+            /* Section spacing */
+            section {
+                page-break-inside: avoid;
+                margin: 1cm 0;
+            }
+
+            /* Legal page footer */
+            @page {
+                margin: 2cm;
+            }
+
+            /* Print header info */
+            .hero::after {
+                content: "Turkett Law Office | turkettlaw.com | (817) 769-2750";
+                position: absolute;
+                bottom: 1cm;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 10pt;
+                color: #666 !important;
+            }
+        }
+
+        /* ===== ENHANCED LINK UNDERLINES ===== */
+        .story-text a,
+        .blog-modal-body a {
+            color: var(--warm);
+            text-decoration: none;
+            background-image: linear-gradient(
+                transparent calc(100% - 2px),
+                rgba(229, 172, 72, 0.4) 2px
+            );
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.3s ease, color 0.3s ease;
+        }
+
+        .story-text a:hover,
+        .blog-modal-body a:hover {
+            color: var(--warm-dark);
+            background-size: 100% 100%;
+            background-image: linear-gradient(
+                transparent calc(100% - 100%),
+                rgba(229, 172, 72, 0.15) 100%
+            );
+        }
+
+        /* ===== ENHANCED CARD MICRO-INTERACTIONS ===== */
+        .service-card,
+        .testimonial-card,
+        .hero-card {
+            will-change: transform;
+            transform-style: preserve-3d;
+        }
+
+        /* Subtle 3D tilt effect on hover */
+        @media (hover: hover) and (pointer: fine) {
+            .service-card:hover {
+                transform: translateY(-12px) perspective(1000px) rotateX(2deg);
+            }
+
+            .testimonial-card:hover {
+                transform: translateY(-12px) perspective(1000px) rotateX(1deg);
+            }
+        }
+
+        /* ===== SMOOTH NUMBER COUNTER ANIMATION ===== */
+        .stat-number {
+            display: inline-block;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-number.counting {
+            animation: countUp 0.6s ease-out forwards;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== IMPROVED BUTTON RIPPLE EFFECT ===== */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+            opacity: 0;
+        }
+
+        .btn:active::after {
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+            transition: 0s;
+        }
+
+        /* ===== GLASSMORPHISM ENHANCEMENT ===== */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 8px 32px rgba(31, 38, 135, 0.08),
+                inset 0 4px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-dark {
+            background: rgba(38, 37, 31, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== CURSOR ENHANCEMENTS ===== */
+        .btn,
+        .nav-link,
+        .service-card-link,
+        .nav-toggle {
+            cursor: pointer;
+        }
+
+        /* ===== SMOOTH IMAGE REVEAL ===== */
+        .reveal-image {
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-image.visible {
+            clip-path: inset(0 0 0 0);
+        }
+
+        /* ===== LOADING STATE FOR FORM ===== */
+        .btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn.loading::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ===== ENHANCED BLOCKQUOTE STYLING ===== */
+        blockquote {
+            position: relative;
+            margin: 2rem 0;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg,
+                rgba(229, 172, 72, 0.05) 0%,
+                rgba(229, 172, 72, 0.02) 100%);
+            border-left: 4px solid var(--warm);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+
+        blockquote::before {
+            content: '"';
+            position: absolute;
+            top: -0.5rem;
+            left: 0.5rem;
+            font-size: 4rem;
+            font-family: var(--font-heading);
+            color: var(--warm);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        /* ===== DECORATIVE FLOURISH ===== */
+        .flourish {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .flourish::before,
+        .flourish::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(229, 172, 72, 0.4) 50%,
+                transparent 100%
+            );
+        }
+
+        .flourish-icon {
+            color: var(--warm);
+            font-size: 0.875rem;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
@@ -4160,7 +4765,10 @@
 
     <!-- Reading Progress -->
     <div class="reading-progress" id="readingProgress"></div>
-    
+
+    <!-- Grain Texture Overlay for depth -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
     <!-- Skip Navigation -->
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress">
@@ -4208,6 +4816,12 @@
         <i class="fas fa-phone icon"></i>
         Free Consultation
     </a>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollToTop" aria-label="Scroll to top">
+        <div class="scroll-top-progress" aria-hidden="true"></div>
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Hero Section -->
     <section class="hero" id="home" aria-labelledby="main-content">
@@ -4264,7 +4878,7 @@
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in-up">
                 <h2>Legal Services Tailored to Your Family's Journey</h2>
                 <p>Every family's situation is unique. I provide comprehensive legal guidance 
                 for the challenges and transitions that matter most to you.</p>
@@ -4395,7 +5009,7 @@
     <section class="story" id="about">
         <div class="container">
             <div class="story-content">
-                <div class="story-text">
+                <div class="story-text fade-in-left">
                     <h2>Why This Work Matters to Me</h2>
                     <p class="lead">Estate planning isn't just legal documents—it's about 
                     protecting the people you love most.</p>
@@ -4413,7 +5027,7 @@
                         a good historical mystery novel. Family isn't just what I do—it's who I am.</p>
                     </div>
                 </div>
-                <div class="story-image">
+                <div class="story-image fade-in-right">
                     <div class="story-photo">
                         <!-- Try to load image first, fallback to icon if image doesn't exist -->
                         <img src="images/stephen-turkett.jpg" alt="Stephen Turkett, Estate Planning Attorney" class="attorney-photo-large"
@@ -4441,7 +5055,7 @@
     <!-- Blog Section -->
     <section class="blog" id="blog">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in-up">
                 <h2>Insights for Texas Families</h2>
                 <p>Practical guidance and real-world advice on protecting your family's future.</p>
             </div>
@@ -4478,7 +5092,7 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <!-- Header with Google Rating Badge -->
-            <div class="testimonials-header">
+            <div class="testimonials-header fade-in-up">
                 <div class="google-rating-badge">
                     <div class="google-icon">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -4726,24 +5340,94 @@
         }
         
         
-        // Scroll to top functionality
+        // Scroll to top functionality with progress indicator
         function updateScrollToTop() {
             const scrollToTop = document.getElementById('scrollToTop');
             const scrollPosition = window.scrollY;
-            
-            if (scrollPosition > 800) {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = Math.min((scrollPosition / docHeight) * 100, 100);
+
+            // Update visibility
+            if (scrollPosition > 400) {
                 scrollToTop.classList.add('visible');
             } else {
                 scrollToTop.classList.remove('visible');
             }
+
+            // Update progress ring
+            const progressRing = scrollToTop.querySelector('.scroll-top-progress');
+            if (progressRing) {
+                progressRing.style.setProperty('--scroll-progress', scrollPercent + '%');
+            }
         }
-        
+
+        // Scroll to top click handler
+        document.getElementById('scrollToTop')?.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
         // Combined scroll handler with throttling
         const handleScroll = throttle(function() {
             handleHeaderScroll();
             updateReadingProgress();
             updateScrollToTop();
         }, 16); // 60fps
+
+        // ===== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS =====
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -80px 0px',
+            threshold: 0.15
+        };
+
+        const scrollAnimationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optionally unobserve after animation (for one-time animations)
+                    // scrollAnimationObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with animation classes
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in, .reveal-image');
+            animatedElements.forEach(el => {
+                scrollAnimationObserver.observe(el);
+            });
+        }
+
+        // Initialize scroll animations on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initScrollAnimations);
+        } else {
+            initScrollAnimations();
+        }
+
+        // ===== STAT NUMBER COUNTER ANIMATION =====
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach((stat, index) => {
+                        setTimeout(() => {
+                            stat.classList.add('counting');
+                        }, index * 150);
+                    });
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe hero stats section
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) {
+            statObserver.observe(heroStats);
+        }
         
         // Blog Posts Data Structure - Easy to add new posts here
         const blogPosts = [
