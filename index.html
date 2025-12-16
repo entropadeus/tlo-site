@@ -4301,12 +4301,58 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact" style="background: linear-gradient(rgba(26, 58, 93, 0.9), rgba(26, 58, 93, 0.9)), url('images/bigstock-Decorative-Scales-Of-Justice-I-21638180.jpg') center/cover no-repeat;">
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact" style="background: linear-gradient(rgba(26, 58, 93, 0.95), rgba(26, 58, 93, 0.95)), url('images/bigstock-Decorative-Scales-Of-Justice-I-21638180.jpg') center/cover no-repeat;">
         <div class="container">
             <h2>Ready to Protect Your Family's Future?</h2>
             <p>Don't wait for tomorrow. Take the first step toward peace of mind today.</p>
-            <a href="tel:8177692750" class="btn btn-white">Call (817) 769-2750</a>
+
+            <form class="contact-form" id="contactForm" novalidate>
+                <div class="form-columns">
+                    <div class="form-left">
+                        <div class="form-group">
+                            <input type="text" id="contactName" name="name" placeholder="Your Name *" required aria-label="Your name" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" name="email" placeholder="Your Email *" required aria-label="Your email" autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="contactPhone" name="phone" placeholder="Your Phone (Optional)" aria-label="Your phone number" autocomplete="tel">
+                        </div>
+                        <div class="form-group">
+                            <select id="contactSubject" name="subject" required aria-label="Select a topic">
+                                <option value="" disabled selected>Select a Topic *</option>
+                                <option value="Estate Planning">Estate Planning</option>
+                                <option value="Special Needs Planning">Special Needs Planning</option>
+                                <option value="Probate & Estate Administration">Probate & Estate Administration</option>
+                                <option value="Guardianships">Guardianships</option>
+                                <option value="Elder Law & Medicaid">Elder Law & Medicaid</option>
+                                <option value="Divorce and Child Custody">Divorce and Child Custody</option>
+                                <option value="Business and Real Estate">Business and Real Estate</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-right">
+                        <div class="form-group">
+                            <textarea id="contactMessage" name="message" placeholder="Tell us about your situation... *" required aria-label="Your message"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="contactConsent" name="consent" required>
+                    <label for="contactConsent">I understand that contacting Turkett Law Office does not create an attorney-client relationship. *</label>
+                </div>
+
+                <button type="submit" class="btn btn-white" id="submitBtn">
+                    <i class="fas fa-envelope"></i> Send Message
+                </button>
+            </form>
+
+            <p class="contact-alternative">
+                Or call us directly: <a href="tel:8177692750" class="contact-phone-link">(817) 769-2750</a>
+            </p>
         </div>
     </section>
 
@@ -5170,6 +5216,115 @@
                     closeBlogPost();
                 }
             });
+
+            // Contact Form - mailto: handler
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form values
+                    const name = document.getElementById('contactName').value.trim();
+                    const email = document.getElementById('contactEmail').value.trim();
+                    const phone = document.getElementById('contactPhone').value.trim();
+                    const subject = document.getElementById('contactSubject').value;
+                    const message = document.getElementById('contactMessage').value.trim();
+                    const consent = document.getElementById('contactConsent').checked;
+
+                    // Validation
+                    let isValid = true;
+                    clearFormErrors();
+
+                    if (!name) {
+                        showFieldError('contactName', 'Please enter your name');
+                        isValid = false;
+                    }
+
+                    if (!email || !isValidEmail(email)) {
+                        showFieldError('contactEmail', 'Please enter a valid email');
+                        isValid = false;
+                    }
+
+                    if (!subject) {
+                        showFieldError('contactSubject', 'Please select a topic');
+                        isValid = false;
+                    }
+
+                    if (!message) {
+                        showFieldError('contactMessage', 'Please enter your message');
+                        isValid = false;
+                    }
+
+                    if (!consent) {
+                        showFieldError('contactConsent', 'Please acknowledge the disclaimer');
+                        isValid = false;
+                    }
+
+                    if (!isValid) return;
+
+                    // Build mailto: link
+                    const emailSubject = encodeURIComponent(`[Website Inquiry] ${subject} - ${name}`);
+                    const phoneInfo = phone ? `\nPhone: ${phone}` : '';
+                    const emailBody = encodeURIComponent(
+                        `Name: ${name}\nEmail: ${email}${phoneInfo}\nTopic: ${subject}\n\n${message}\n\n---\nSent via website contact form`
+                    );
+
+                    // Open email client
+                    window.location.href = `mailto:info@turkettlaw.com?subject=${emailSubject}&body=${emailBody}`;
+
+                    // Show success feedback
+                    showFormSuccess();
+                });
+            }
+
+            // Form validation helpers
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function showFieldError(fieldId, message) {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.classList.add('field-error');
+                    field.setAttribute('aria-invalid', 'true');
+
+                    // Create error message element
+                    const errorEl = document.createElement('span');
+                    errorEl.className = 'error-message';
+                    errorEl.textContent = message;
+                    errorEl.setAttribute('role', 'alert');
+
+                    // Insert after field (or label for checkbox)
+                    if (field.type === 'checkbox') {
+                        field.closest('.form-checkbox').appendChild(errorEl);
+                    } else {
+                        field.parentNode.appendChild(errorEl);
+                    }
+                }
+            }
+
+            function clearFormErrors() {
+                document.querySelectorAll('.field-error').forEach(el => {
+                    el.classList.remove('field-error');
+                    el.removeAttribute('aria-invalid');
+                });
+                document.querySelectorAll('.error-message').forEach(el => el.remove());
+                document.querySelectorAll('.form-success').forEach(el => el.remove());
+            }
+
+            function showFormSuccess() {
+                const form = document.getElementById('contactForm');
+                const successEl = document.createElement('div');
+                successEl.className = 'form-success';
+                successEl.innerHTML = '<i class="fas fa-check-circle"></i> Your email client should open shortly. If not, please email us directly at info@turkettlaw.com';
+                successEl.setAttribute('role', 'status');
+                form.insertBefore(successEl, form.firstChild);
+
+                // Auto-remove after 10 seconds
+                setTimeout(() => {
+                    successEl.remove();
+                }, 10000);
+            }
         });
     </script>
 </body>
