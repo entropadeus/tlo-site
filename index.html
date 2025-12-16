@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- TODO: SECURITY - Add Content-Security-Policy meta tag to prevent XSS attacks -->
+    <!-- TODO: SECURITY - Add X-Frame-Options equivalent (frame-ancestors in CSP) to prevent clickjacking -->
+    <!-- TODO: SECURITY - Add X-Content-Type-Options: nosniff via server headers or meta tag -->
+
     <!-- Google tag (gtag.js) -->
+    <!-- TODO: SECURITY - External script loaded without Subresource Integrity (SRI) hash.
+         If the CDN is compromised, malicious code could be injected. Consider self-hosting or adding integrity attribute. -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-05BL1GMS5F"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -32,7 +38,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Load fonts with reduced weights -->
+    <!-- TODO: SECURITY - Google Fonts loaded without SRI. While Google Fonts doesn't support SRI,
+         consider self-hosting fonts for better security and privacy. -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- TODO: SECURITY - Font Awesome loaded from CDN without Subresource Integrity (SRI) hash.
+         Add integrity="sha512-..." and crossorigin="anonymous" attributes for supply chain security.
+         Get SRI hash from: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         /* ===== CSS CUSTOM PROPERTIES ===== */
@@ -4817,17 +4828,22 @@
         function renderBlogPosts() {
             const blogGrid = document.getElementById('blogGrid');
             if (!blogGrid) return;
-            
+
             // Clear existing content
             blogGrid.innerHTML = '';
-            
+
             // Render first 3 blog posts
             const postsToShow = blogPosts.slice(0, 3);
-            
+
             postsToShow.forEach((post, index) => {
                 const blogCard = document.createElement('div');
                 blogCard.className = 'blog-card';
                 blogCard.style.animationDelay = `${index * 0.2}s`;
+                // TODO: SECURITY - XSS vulnerability: Using innerHTML with template literals.
+                // If blog post data (category, title, excerpt, date, readTime) comes from user input or
+                // an untrusted source, malicious scripts could be injected.
+                // FIX: Use textContent for text-only fields, or sanitize HTML with DOMPurify library.
+                // Example: post.title = DOMPurify.sanitize(post.title) or use document.createTextNode()
                 blogCard.innerHTML = `
                     <div class="blog-card-content">
                         <div class="blog-category">${post.category}</div>
@@ -4847,6 +4863,9 @@
         function truncateContent(htmlContent, maxWords = 180) {
             // Create a temporary div to parse HTML
             const tempDiv = document.createElement('div');
+            // TODO: SECURITY - XSS vulnerability: innerHTML used with htmlContent parameter.
+            // If htmlContent contains malicious scripts, they could execute in this context.
+            // FIX: Sanitize htmlContent with DOMPurify before assignment: tempDiv.innerHTML = DOMPurify.sanitize(htmlContent);
             tempDiv.innerHTML = htmlContent;
             
             // Get text content and split into words
@@ -4914,20 +4933,26 @@
         function openBlogPost(postId) {
             const post = blogPosts.find(p => p.id === postId);
             if (!post) return;
-            
+
             document.getElementById('modalCategory').textContent = post.category;
             document.getElementById('modalTitle').textContent = post.title;
+            // TODO: SECURITY - XSS vulnerability: innerHTML used with post.date and post.readTime.
+            // If these values come from untrusted sources, malicious scripts could be injected.
+            // FIX: Sanitize values or build DOM elements programmatically using createTextNode()
             document.getElementById('modalDate').innerHTML = `<i class="fas fa-calendar-alt"></i> ${post.date}`;
             document.getElementById('modalReadTime').innerHTML = `<i class="fas fa-clock"></i> ${post.readTime}`;
-            
+
             // Show truncated content with Continue Reading button
             const truncatedContent = truncateContent(post.content);
             const isContentTruncated = truncatedContent !== post.content;
-            
+
             let modalContent = truncatedContent;
-            
+
             if (isContentTruncated) {
                 const slug = generateSlug(post.title);
+                // TODO: SECURITY - Tabnabbing vulnerability: target="_blank" without rel="noopener noreferrer".
+                // The opened page can access window.opener and redirect the original page to a phishing site.
+                // FIX: Add rel="noopener noreferrer" to the anchor tag.
                 modalContent += `
                     <div class="continue-reading-container">
                         <a href="blog/${slug}.html" class="btn-continue-reading" target="_blank">
@@ -4937,7 +4962,10 @@
                     </div>
                 `;
             }
-            
+
+            // TODO: SECURITY - XSS vulnerability: innerHTML used with modalContent which contains post.content.
+            // Blog post content could contain malicious scripts if sourced from untrusted input.
+            // FIX: Sanitize content with DOMPurify: document.getElementById('modalContent').innerHTML = DOMPurify.sanitize(modalContent);
             document.getElementById('modalContent').innerHTML = modalContent;
             
             const modal = document.getElementById('blogModal');
