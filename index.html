@@ -515,6 +515,13 @@
             border-radius: 8px;
             transition: all 0.3s ease;
             background: transparent;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-link:active {
+            transform: scale(0.97);
+            transition-duration: 0.1s;
         }
 
         .nav-link::after {
@@ -807,12 +814,21 @@
             display: none;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             gap: 5px;
             background: transparent;
             border: none;
             cursor: pointer;
-            padding: 10px;
+            padding: 12px;
+            min-width: 48px;
+            min-height: 48px;
             z-index: 1001;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-toggle:active {
+            transform: scale(0.92);
         }
 
         .hamburger-line {
@@ -863,15 +879,22 @@
             opacity: 0;
             visibility: hidden;
             will-change: transform, opacity;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
 
         .floating-cta:hover {
             background: rgba(212, 154, 53, 0.95);
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 
+            box-shadow:
                 0 18px 45px rgba(229, 172, 72, 0.5),
                 inset 0 4px 18px rgba(255, 255, 255, 0.4);
+        }
+
+        .floating-cta:active {
+            transform: scale(0.95);
+            transition-duration: 0.1s;
         }
 
         .floating-cta::before {
@@ -1150,6 +1173,15 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            min-height: 48px;
+        }
+
+        /* Touch feedback for mobile */
+        .btn:active {
+            transform: scale(0.97);
+            transition-duration: 0.1s;
         }
 
         .btn i {
@@ -1572,10 +1604,17 @@
             color: inherit;
             display: block;
             height: 100%;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .service-card-link:hover {
             text-decoration: none;
+        }
+
+        .service-card-link:active .service-card {
+            transform: scale(0.98);
+            transition-duration: 0.1s;
         }
 
         .service-card-link:hover .service-card {
@@ -2329,8 +2368,8 @@
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(229, 172, 72, 0.2);
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -2341,6 +2380,8 @@
             color: var(--neutral-mid);
             font-size: var(--text-lg);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .blog-modal-close:hover {
@@ -3041,9 +3082,16 @@
             align-items: center;
             justify-content: center;
             font-size: var(--text-lg);
-            box-shadow: 
+            box-shadow:
                 0 6px 24px rgba(38, 37, 31, 0.15),
                 inset 0 2px 8px rgba(255, 255, 255, 0.4);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .scroll-to-top:active {
+            transform: scale(0.9);
+            transition-duration: 0.1s;
         }
         
         .scroll-to-top.visible {
@@ -3068,9 +3116,17 @@
             .scroll-to-top {
                 bottom: 20px;
                 left: 20px;
-                width: 45px;
-                height: 45px;
+                width: 48px;
+                height: 48px;
                 font-size: var(--text-lg);
+            }
+
+            /* Floating CTA mobile position */
+            .floating-cta {
+                bottom: 20px;
+                right: 20px;
+                min-width: 48px;
+                min-height: 48px;
             }
         }
         
@@ -3123,6 +3179,25 @@
                 height: 42px;
             }
 
+            /* Mobile nav backdrop overlay */
+            .nav-backdrop {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.4);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                z-index: 998;
+            }
+
+            .nav-backdrop.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
             .nav-menu {
                 position: fixed;
                 left: -100%;
@@ -3131,19 +3206,26 @@
                 background: rgba(255, 255, 255, 0.98);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
-                width: 100%;
+                width: 85%;
+                max-width: 320px;
                 height: calc(100vh - 70px);
                 text-align: center;
                 transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
                 padding: 2rem 1.5rem;
                 overflow-y: auto;
                 gap: 0.5rem;
                 justify-content: flex-start;
+                z-index: 999;
             }
 
             .nav-menu.active {
                 left: 0;
+            }
+
+            /* Body scroll lock when menu open */
+            body.menu-open {
+                overflow: hidden;
             }
 
             .nav {
@@ -3248,17 +3330,26 @@
                 border-radius: 12px;
                 font-size: 1rem;
                 width: 100%;
+                min-height: 52px;
                 justify-content: center;
                 color: var(--primary);
+                display: flex;
+                align-items: center;
             }
 
             .nav-link::after {
                 display: none;
             }
 
-            .nav-link:hover {
+            .nav-link:hover,
+            .nav-link:active {
                 background: rgba(229, 172, 72, 0.1);
                 color: var(--warm-dark);
+            }
+
+            .nav-link:active {
+                background: rgba(229, 172, 72, 0.2);
+                transform: scale(0.98);
             }
 
             .nav-cta {
@@ -3391,30 +3482,64 @@
             }
 
             .blog-modal {
-                padding: 1rem;
+                padding: 0;
+                align-items: flex-end;
             }
 
             .blog-modal-content {
                 margin: 0;
-                max-height: calc(100vh - 2rem);
-                border-radius: 16px;
+                max-height: 92vh;
+                border-radius: 20px 20px 0 0;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Drag handle indicator for swipe affordance */
+            .blog-modal-content::before {
+                content: '';
+                position: sticky;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                display: block;
+                width: 40px;
+                height: 4px;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 2px;
+                margin: 12px auto 0;
+                z-index: 20;
+            }
+
+            .blog-modal-close {
+                top: 1rem;
+                right: 1rem;
+                width: 48px;
+                height: 48px;
+                font-size: var(--text-xl);
+            }
+
+            .blog-modal-close:active {
+                transform: scale(0.9);
+                background: var(--warm);
+                color: white;
             }
 
             .blog-modal-header {
-                padding: 2.5rem 2rem 2rem;
+                padding: 2rem 1.5rem 1.5rem;
             }
 
             .blog-modal-header h2 {
                 font-size: var(--text-2xl);
+                padding-right: 3rem;
             }
 
             .blog-modal-body {
-                padding: 2rem;
+                padding: 1.5rem;
                 font-size: var(--text-base);
+                line-height: 1.8;
             }
 
             .blog-modal-footer {
-                padding: 2rem;
+                padding: 1.5rem;
             }
 
             .continue-reading-container {
@@ -3588,10 +3713,18 @@
             
             .scroll-to-top {
                 bottom: var(--spacing-lg);
-                right: var(--spacing-lg);
-                width: 45px;
-                height: 45px;
+                left: var(--spacing-lg);
+                right: auto;
+                width: 48px;
+                height: 48px;
                 font-size: var(--text-lg);
+            }
+
+            /* Hide floating CTA when nav menu is open */
+            .nav-menu.active ~ .floating-cta,
+            body.menu-open .floating-cta {
+                opacity: 0;
+                pointer-events: none;
             }
             
             .cta-section {
@@ -3774,6 +3907,7 @@
                 </li>
             </ul>
         </nav>
+        <div class="nav-backdrop" id="navBackdrop"></div>
     </header>
 
     <!-- Floating CTA Button -->
@@ -4866,17 +5000,38 @@
         function toggleMobileMenu() {
             const navToggle = document.getElementById('navToggle');
             const navMenu = document.getElementById('navMenu');
+            const navBackdrop = document.getElementById('navBackdrop');
 
             if (navToggle && navMenu) {
                 navToggle.classList.toggle('active');
                 navMenu.classList.toggle('active');
+
+                // Toggle backdrop
+                if (navBackdrop) {
+                    navBackdrop.classList.toggle('active');
+                }
 
                 // Update aria-expanded for accessibility
                 const isExpanded = navMenu.classList.contains('active');
                 navToggle.setAttribute('aria-expanded', isExpanded);
 
                 // Prevent body scroll when menu is open
-                document.body.style.overflow = isExpanded ? 'hidden' : '';
+                document.body.classList.toggle('menu-open', isExpanded);
+            }
+        }
+
+        // Close mobile menu when clicking backdrop
+        function closeMobileMenu() {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            const navBackdrop = document.getElementById('navBackdrop');
+
+            if (navMenu && navMenu.classList.contains('active')) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                if (navBackdrop) navBackdrop.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('menu-open');
             }
         }
 
@@ -4889,6 +5044,12 @@
             const navToggle = document.getElementById('navToggle');
             if (navToggle) {
                 navToggle.addEventListener('click', toggleMobileMenu);
+            }
+
+            // Backdrop click to close menu
+            const navBackdrop = document.getElementById('navBackdrop');
+            if (navBackdrop) {
+                navBackdrop.addEventListener('click', closeMobileMenu);
             }
             
             // Add scroll listener for header and new features with throttling
@@ -4926,14 +5087,11 @@
                     if (href.startsWith('#')) {
                         e.preventDefault();
                         smoothScroll(href);
-                        
+
                         // Close mobile menu if open with smooth transition
-                        const navMenu = document.getElementById('navMenu');
-                        if (navMenu.classList.contains('active')) {
-                            setTimeout(() => {
-                                toggleMobileMenu();
-                            }, 200); // Small delay for better UX
-                        }
+                        setTimeout(() => {
+                            closeMobileMenu();
+                        }, 200); // Small delay for better UX
                     }
                 });
             });

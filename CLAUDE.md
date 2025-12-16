@@ -71,6 +71,48 @@ The entire website is in `index.html` (1940 lines) with three main sections:
 - Consistent CSS needed across all pages for uniform UX
 - Mobile-first responsive design principles applied
 
+### Mobile UI Enhancements - 2025-12-16
+
+#### Touch Target Improvements
+- All interactive elements now meet 48px minimum touch target size (Apple/Google guidelines)
+- Added `touch-action: manipulation` to remove 300ms tap delay on mobile
+- Added `-webkit-tap-highlight-color: transparent` for cleaner touch feedback
+
+#### Touch Feedback States
+- Added `:active` states with scale transforms for tactile feedback on:
+  - Navigation links (scale 0.97)
+  - Buttons (scale 0.97)
+  - Service cards (scale 0.98)
+  - Floating CTA (scale 0.95)
+  - Scroll-to-top button (scale 0.9)
+  - Blog modal close button (scale 0.9)
+
+#### Mobile Navigation Drawer
+- Added backdrop overlay (`nav-backdrop`) for tap-to-close functionality
+- Nav drawer now slides from left with 85% width (max 320px)
+- Body scroll lock when menu is open via `body.menu-open` class
+- Floating CTA hides when nav menu is open to reduce visual clutter
+
+#### Blog Modal Mobile UX
+- Bottom-sheet style on mobile (aligns to bottom, rounded top corners)
+- Drag handle indicator for swipe affordance
+- Close button increased to 48px with active state
+- Improved padding and line-height for readability
+- `-webkit-overflow-scrolling: touch` for momentum scrolling
+
+#### Floating Elements
+- Scroll-to-top: bottom-left position (avoids thumb conflict)
+- Floating CTA: bottom-right position
+- Both elements have 48px touch targets on mobile
+- CTA hides when mobile nav is open
+
+#### Key CSS Classes Added
+- `.nav-backdrop` - Mobile menu backdrop overlay
+- `.menu-open` - Body class for scroll lock when menu is open
+
+#### JavaScript Functions Added
+- `closeMobileMenu()` - Closes mobile menu and removes all associated states
+
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.
