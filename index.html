@@ -117,6 +117,20 @@
             font-size: 16px;
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
+            /* Smoother scroll on iOS */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent overscroll bounce on mobile for contained areas */
+        html, body {
+            overscroll-behavior: none;
+        }
+
+        /* Optimize scrolling performance */
+        @supports (scroll-behavior: smooth) {
+            html {
+                scroll-behavior: smooth;
+            }
         }
 
         /* Skip Navigation Link */
@@ -159,6 +173,8 @@
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             position: relative;
+            /* Improve scroll performance */
+            scroll-behavior: smooth;
             font-feature-settings: "kern" 1, "liga" 1, "tnum" 1;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
@@ -431,7 +447,12 @@
             border-bottom: 1px solid rgba(229, 172, 72, 0.1);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
             z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            /* GPU acceleration for smoother scroll */
+            transform: translateZ(0);
+            will-change: background, box-shadow;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .header.scrolled {
@@ -456,9 +477,14 @@
             height: 100%;
             background: linear-gradient(90deg, var(--warm) 0%, var(--warm-light) 50%, var(--warm) 100%);
             background-size: 200% 100%;
-            width: 0%;
-            transition: width 0.1s ease-out;
+            width: 100%;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.05s linear;
             animation: shimmer 2s ease-in-out infinite;
+            /* GPU acceleration */
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
         @keyframes shimmer {
@@ -883,6 +909,12 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        .floating-cta.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            will-change: auto;
+        }
 
         .floating-cta:hover {
             background: rgba(212, 154, 53, 0.95);
@@ -3098,6 +3130,7 @@
             opacity: 1;
             visibility: visible;
             transform: translateY(0) rotate(0deg);
+            will-change: auto; /* Reset will-change once visible */
         }
         
         .scroll-to-top:hover {
@@ -4360,51 +4393,107 @@
 
     <script>
         // Performance and UI Enhancement JavaScript
-        
-        // Throttle function for performance
-        function throttle(func, limit) {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
+
+        // Optimized scroll state management
+        const scrollState = {
+            ticking: false,
+            lastScrollY: 0,
+            // Cache DOM elements for performance
+            header: null,
+            scrollProgressBar: null,
+            floatingCta: null,
+            readingProgress: null,
+            scrollToTop: null,
+            documentHeight: 0
+        };
+
+        // Initialize cached elements (called on DOMContentLoaded)
+        function initScrollElements() {
+            scrollState.header = document.getElementById('header');
+            scrollState.scrollProgressBar = document.getElementById('scrollProgressBar');
+            scrollState.floatingCta = document.getElementById('floatingCta');
+            scrollState.readingProgress = document.getElementById('readingProgress');
+            scrollState.scrollToTop = document.getElementById('scrollToTop');
+            updateDocumentHeight();
+        }
+
+        // Update document height (call on resize)
+        function updateDocumentHeight() {
+            scrollState.documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        }
+
+        // Optimized scroll handler using requestAnimationFrame
+        function onScroll() {
+            scrollState.lastScrollY = window.scrollY;
+
+            if (!scrollState.ticking) {
+                requestAnimationFrame(updateScrollUI);
+                scrollState.ticking = true;
+            }
+        }
+
+        // Combined UI update function for smooth 60fps performance
+        function updateScrollUI() {
+            const scrollY = scrollState.lastScrollY;
+            const scrollPercent = scrollState.documentHeight > 0
+                ? (scrollY / scrollState.documentHeight) * 100
+                : 0;
+
+            // Header scroll state
+            if (scrollState.header) {
+                if (scrollY > 100) {
+                    scrollState.header.classList.add('scrolled');
+                } else {
+                    scrollState.header.classList.remove('scrolled');
                 }
             }
+
+            // Scroll progress bar (use transform for GPU acceleration)
+            if (scrollState.scrollProgressBar) {
+                scrollState.scrollProgressBar.style.transform = `scaleX(${scrollPercent / 100})`;
+            }
+
+            // Reading progress
+            if (scrollState.readingProgress) {
+                scrollState.readingProgress.style.width = scrollPercent + '%';
+            }
+
+            // Floating CTA visibility
+            if (scrollState.floatingCta) {
+                if (scrollY > 500) {
+                    scrollState.floatingCta.classList.add('visible');
+                } else {
+                    scrollState.floatingCta.classList.remove('visible');
+                }
+            }
+
+            // Scroll to top button visibility
+            if (scrollState.scrollToTop) {
+                if (scrollY > 800) {
+                    scrollState.scrollToTop.classList.add('visible');
+                } else {
+                    scrollState.scrollToTop.classList.remove('visible');
+                }
+            }
+
+            scrollState.ticking = false;
         }
-        
-        // Reading Progress Indicator
+
+        // Legacy functions for compatibility
         function updateReadingProgress() {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            const progressBar = document.getElementById('readingProgress');
-            if (progressBar) {
-                progressBar.style.width = scrolled + '%';
-            }
+            // Now handled by updateScrollUI
         }
-        
-        
-        // Scroll to top functionality
+
         function updateScrollToTop() {
-            const scrollToTop = document.getElementById('scrollToTop');
-            const scrollPosition = window.scrollY;
-            
-            if (scrollPosition > 800) {
-                scrollToTop.classList.add('visible');
-            } else {
-                scrollToTop.classList.remove('visible');
-            }
+            // Now handled by updateScrollUI
         }
-        
-        // Combined scroll handler with throttling
-        const handleScroll = throttle(function() {
-            handleHeaderScroll();
-            updateReadingProgress();
-            updateScrollToTop();
-        }, 16); // 60fps
+
+        function handleHeaderScroll() {
+            // Now handled by updateScrollUI
+        }
+
+        // Deprecated throttle kept for any external usage
+        const handleScroll = onScroll;
         
         // Blog Posts Data Structure - Easy to add new posts here
         const blogPosts = [
@@ -4985,13 +5074,44 @@
         }
 
 
-        // Smooth scrolling for navigation links
+        // Easing function for smooth animations (ease-out-cubic)
+        function easeOutCubic(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+
+        // Smooth scroll to top with custom easing
+        function smoothScrollToTop() {
+            const startY = window.scrollY;
+            const duration = Math.min(800, Math.max(300, startY * 0.5)); // Adaptive duration
+            const startTime = performance.now();
+
+            function scrollStep(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeOutCubic(progress);
+
+                window.scrollTo(0, startY * (1 - eased));
+
+                if (progress < 1) {
+                    requestAnimationFrame(scrollStep);
+                }
+            }
+
+            requestAnimationFrame(scrollStep);
+        }
+
+        // Smooth scrolling for navigation links with improved performance
         function smoothScroll(target) {
             const element = document.querySelector(target);
             if (element) {
-                element.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const headerOffset = 80; // Account for fixed header
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+                // Use native smooth scroll for better performance
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
                 });
             }
         }
@@ -5037,6 +5157,9 @@
 
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize optimized scroll handling
+            initScrollElements();
+
             // Render blog posts
             renderBlogPosts();
 
@@ -5051,32 +5174,27 @@
             if (navBackdrop) {
                 navBackdrop.addEventListener('click', closeMobileMenu);
             }
-            
-            // Add scroll listener for header and new features with throttling
-            let ticking = false;
-            function requestTick() {
-                if (!ticking) {
-                    requestAnimationFrame(handleScroll);
-                    ticking = true;
-                    setTimeout(() => { ticking = false; }, 16); // ~60fps
-                }
-            }
-            window.addEventListener('scroll', requestTick, { passive: true });
-            
-            // Scroll to top functionality
+
+            // Optimized scroll listener with passive for better performance
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            // Update document height on resize (debounced)
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(updateDocumentHeight, 150);
+            }, { passive: true });
+
+            // Scroll to top functionality with smooth easing
             const scrollToTopBtn = document.getElementById('scrollToTop');
             if (scrollToTopBtn) {
                 scrollToTopBtn.addEventListener('click', function() {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+                    smoothScrollToTop();
                 });
             }
-            
-            // Initialize floating elements visibility
-            updateScrollToTop();
-            updateReadingProgress();
+
+            // Initialize scroll UI state
+            updateScrollUI();
             
             
             // Add smooth scrolling to navigation links
