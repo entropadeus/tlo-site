@@ -834,6 +834,59 @@
             display: none;
         }
 
+        .mobile-message-btn {
+            display: none;
+        }
+
+        /* Nav Message CTA - "Message Us" button */
+        .nav-message-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(38, 37, 31, 0.2);
+            margin-left: 0.5rem;
+        }
+
+        .nav-message-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-message-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(38, 37, 31, 0.3);
+            background: linear-gradient(135deg, #2d2b24 0%, #1a1915 100%);
+        }
+
+        .nav-message-cta:hover::before {
+            left: 100%;
+        }
+
+        .nav-message-cta:active {
+            transform: translateY(-1px);
+            transition-duration: 0.1s;
+        }
+
+        .nav-message-cta i {
+            font-size: 0.85rem;
+        }
+
         /* Floating CTA Button */
         .floating-cta {
             position: fixed;
@@ -3248,6 +3301,39 @@
                 transform: translateY(-50%) scale(0.95);
             }
 
+            .mobile-message-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                left: 50px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 42px;
+                height: 42px;
+                background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+                color: white;
+                border-radius: 50%;
+                font-size: 1rem;
+                box-shadow: 0 4px 15px rgba(38, 37, 31, 0.2);
+                z-index: 1002;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-message-btn:active {
+                transform: translateY(-50%) scale(0.95);
+            }
+
+            /* Nav Message CTA mobile styles */
+            .nav-message-cta {
+                margin: 0.5rem auto 0;
+                padding: 0.875rem 1.5rem;
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+
             /* Hero section mobile styles */
             .hero {
                 padding: 7rem 0 3rem;
@@ -4751,6 +4837,9 @@
             <a href="tel:8177692750" class="mobile-phone-btn" aria-label="Call Now">
                 <i class="fas fa-phone"></i>
             </a>
+            <a href="#contact" class="mobile-message-btn" aria-label="Message Us">
+                <i class="fas fa-envelope"></i>
+            </a>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -4761,6 +4850,12 @@
                 <li><a href="#about" class="nav-link">About Stephen</a></li>
                 <li><a href="#blog" class="nav-link">Blog</a></li>
                 <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li>
+                    <a href="#contact" class="nav-message-cta">
+                        <i class="fas fa-envelope"></i>
+                        Message Us
+                    </a>
+                </li>
                 <li>
                     <a href="tel:8177692750" class="nav-phone-cta">
                         <span class="nav-phone-ring"></span>
