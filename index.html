@@ -3303,26 +3303,26 @@
         /* ===== ENHANCED RESPONSIVE DESIGN ===== */
         @media (max-width: 1024px) {
             .hero-content {
-                grid-template-columns: 1fr;
-                gap: 4rem;
-                text-align: center;
+                grid-template-columns: 1.1fr 0.9fr;
+                gap: 2.5rem;
+                align-items: center;
             }
-            
+
             .hero {
-                padding: 10rem 0 6rem;
+                padding: 8rem 0 4rem;
                 min-height: auto;
                 background-attachment: scroll;
             }
-            
+
             .hero-card {
-                max-width: 500px;
-                margin: 0 auto;
+                max-width: none;
+                margin: 0;
             }
-            
+
             .hero-text {
                 animation: fadeInUp 1s ease-out 0.2s both;
             }
-            
+
             .hero-image {
                 animation: fadeInUp 1s ease-out 0.4s both;
             }
@@ -3472,59 +3472,117 @@
                 justify-content: center;
             }
 
-            /* Hero section mobile styles */
+            /* Hero section mobile styles - side by side layout */
             .hero {
-                padding: 7rem 0 3rem;
+                padding: 5.5rem 0 2rem;
                 min-height: auto;
                 background-attachment: scroll;
             }
 
             .hero-content {
-                gap: 2.5rem;
+                grid-template-columns: 1.15fr 0.85fr;
+                gap: 1.25rem;
                 min-height: auto;
+                align-items: center;
+            }
+
+            .hero-text::before {
+                width: 40px;
+                height: 2px;
+                margin-bottom: 1rem;
+            }
+
+            .hero-text h1 {
+                font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+                margin-bottom: 0.75rem;
+                line-height: 1.2;
+            }
+
+            .hero-text h1 .highlight::after {
+                display: none;
+            }
+
+            .hero-text .lead {
+                font-size: 0.85rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+                max-width: none;
             }
 
             .hero-buttons {
-                margin-top: 1.5rem;
+                flex-direction: column;
+                gap: 0.625rem;
+                margin-top: 0.5rem;
+            }
+
+            .hero-buttons .btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.8rem;
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .hero-image {
+                display: flex;
+                justify-content: center;
             }
 
             .hero-card {
-                padding: 2rem;
-                border-radius: 24px;
+                padding: 1rem;
+                border-radius: 16px;
                 max-width: none;
                 margin: 0;
             }
 
-            .hero-text h1 {
-                margin-bottom: 1.5rem;
-                text-align: center;
+            .hero-card-header {
+                gap: 0.75rem;
+                margin-bottom: 0.75rem;
             }
 
-            .hero-text .lead {
-                margin-bottom: 2rem;
-                text-align: center;
+            .hero-card .attorney-photo {
+                width: 100px !important;
+                height: 100px !important;
+                border-width: 3px !important;
             }
 
-            .hero-buttons {
-                justify-content: center;
-                gap: 1rem;
+            .hero-card h3 {
+                font-size: 1rem;
+                margin-bottom: 0.125rem;
             }
 
-            .btn {
-                padding: 0.875rem 1.75rem;
-                font-size: 0.85rem;
+            .hero-card .subtitle {
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+            }
+
+            .hero-card .subtitle::before,
+            .hero-card .subtitle::after {
+                width: 12px;
+            }
+
+            .hero-card > p {
+                font-size: 0.75rem;
+                line-height: 1.5;
+                margin-bottom: 0.75rem;
+                display: none;
             }
 
             .hero-stats {
-                gap: 1rem;
+                gap: 0.5rem;
+                margin-top: 0.75rem;
+                padding-top: 0.75rem;
             }
 
             .stat {
-                padding: 1rem;
+                padding: 0.5rem;
             }
 
             .stat-number {
-                font-size: var(--text-2xl);
+                font-size: 1.1rem;
+            }
+
+            .stat-label {
+                font-size: 0.6rem;
             }
 
             .nav-link {
@@ -3612,23 +3670,9 @@
                 transform: translateY(-8px);
             }
 
-            .hero-content,
             .story-content {
                 grid-template-columns: 1fr;
                 gap: 3rem;
-            }
-
-            .hero {
-                padding: 9rem 0 5rem;
-            }
-
-            .hero-card {
-                padding: 2rem;
-            }
-
-            .attorney-photo {
-                width: 200px !important;
-                height: 200px !important;
             }
 
             .attorney-photo-large {
@@ -3859,27 +3903,86 @@
             }
 
             .hero {
-                padding: 4.5rem 0 2.5rem;
+                padding: 4.75rem 0 1.5rem;
             }
-            
-            .hero-card {
-                padding: 2rem;
-                border-radius: 20px;
+
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
             }
-            
+
+            .hero-text::before {
+                width: 30px;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: clamp(1.1rem, 4vw, 1.35rem);
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-text .lead {
+                font-size: 0.75rem;
+                line-height: 1.5;
+                margin-bottom: 0.75rem;
+            }
+
             .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+                gap: 0.5rem;
             }
-            
-            .btn {
-                width: 100%;
-                max-width: 240px;
+
+            .hero-buttons .btn {
+                padding: 0.625rem 1rem;
+                font-size: 0.7rem;
+                max-width: 160px;
             }
-            
+
+            .hero-card {
+                padding: 0.75rem;
+                border-radius: 12px;
+            }
+
+            .hero-card-header {
+                gap: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-card .attorney-photo {
+                width: 70px !important;
+                height: 70px !important;
+                border-width: 2px !important;
+            }
+
+            .hero-card h3 {
+                font-size: 0.85rem;
+            }
+
+            .hero-card .subtitle {
+                font-size: 0.55rem;
+            }
+
+            .hero-card .subtitle::before,
+            .hero-card .subtitle::after {
+                width: 8px;
+            }
+
             .hero-stats {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.375rem;
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+            }
+
+            .stat {
+                padding: 0.375rem;
+            }
+
+            .stat-number {
+                font-size: 0.95rem;
+            }
+
+            .stat-label {
+                font-size: 0.5rem;
             }
         }
         
