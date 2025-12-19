@@ -3305,7 +3305,7 @@
             .hero-content {
                 grid-template-columns: 1.1fr 0.9fr;
                 gap: 2.5rem;
-                align-items: center;
+                align-items: stretch;
             }
 
             .hero {
@@ -3314,17 +3314,20 @@
                 background-attachment: scroll;
             }
 
+            .hero-image {
+                display: flex;
+                align-items: stretch;
+                animation: fadeInUp 1s ease-out 0.4s both;
+            }
+
             .hero-card {
                 max-width: none;
                 margin: 0;
+                height: 100%;
             }
 
             .hero-text {
                 animation: fadeInUp 1s ease-out 0.2s both;
-            }
-
-            .hero-image {
-                animation: fadeInUp 1s ease-out 0.4s both;
             }
         }
 
@@ -3491,7 +3494,7 @@
                 grid-template-columns: 1.15fr 0.85fr;
                 gap: 1.25rem;
                 min-height: auto;
-                align-items: center;
+                align-items: stretch;
             }
 
             .hero-text::before {
@@ -3533,6 +3536,7 @@
             .hero-image {
                 display: flex;
                 justify-content: center;
+                align-items: stretch;
             }
 
             .hero-card {
@@ -3540,7 +3544,8 @@
                 border-radius: 16px;
                 max-width: none;
                 margin: 0;
-                min-height: 280px;
+                min-height: auto;
+                height: 100%;
                 display: flex;
                 flex-direction: column;
             }
