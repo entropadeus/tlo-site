@@ -98,25 +98,6 @@ html {
     contain-intrinsic-size: auto 600px;
 }
 
-/* Skip Navigation Link */
-.skip-nav {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    z-index: 1000000;
-    background: var(--primary);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: top 0.3s;
-}
-
-.skip-nav:focus {
-    top: 6px;
-}
-
 /* Reading Progress Indicator */
 .reading-progress {
     position: fixed;
