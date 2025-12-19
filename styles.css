@@ -78,8 +78,24 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+/* GPU acceleration for animated elements */
+.header, .floating-cta, .scroll-to-top, .nav-menu, .modal {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Content containment for major sections */
+.services, .about, .testimonials, .blog-preview, .contact-section, .footer {
+    contain: layout style paint;
+}
+
+/* Defer rendering of offscreen content */
+.testimonials, .blog-preview, .contact-section, .footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
 }
 
 /* Skip Navigation Link */
