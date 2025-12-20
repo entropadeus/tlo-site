@@ -988,6 +988,10 @@
             font-size: var(--text-sm);
             box-shadow: 0 8px 25px rgba(229, 172, 72, 0.35);
             z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
             transition:
                 transform 0.4s var(--ease-out-expo),
                 opacity 0.4s var(--ease-out-expo),
@@ -1020,7 +1024,6 @@
         }
 
         .floating-cta .icon {
-            margin-right: 0.5rem;
             transition: transform 0.3s var(--ease-out-back);
         }
 
