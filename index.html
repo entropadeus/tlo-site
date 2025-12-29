@@ -153,6 +153,29 @@
             box-sizing: border-box;
         }
 
+        /* Skip to Content Link - Accessibility */
+        .skip-to-content {
+            position: absolute;
+            top: -9999px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warm);
+            color: white;
+            padding: 1rem 2rem;
+            z-index: 10001; /* Above everything */
+            border-radius: 0 0 12px 12px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: top 0.3s ease;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+            outline: 4px solid white;
+            outline-offset: -4px;
+        }
+
         html {
             scroll-behavior: smooth;
             font-size: 16px;
@@ -5626,6 +5649,9 @@
 </style>
 </head>
 <body>
+    <!-- Skip to Content for Accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
     <!-- Reading Progress -->
     <div class="reading-progress" id="readingProgress"></div>
 
@@ -6133,9 +6159,9 @@
                     <p>Guiding Texas families through life's important legal decisions 
                     with compassion, expertise, and personal understanding.</p>
                     <div class="footer-social">
-                        <a href="https://www.facebook.com/profile.php?id=100032740464760" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="mailto:info@turkettlaw.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=100032740464760" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visit us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Visit us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:info@turkettlaw.com" class="social-link" aria-label="Email us"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
