@@ -332,6 +332,27 @@
         .leading-loose { line-height: var(--leading-loose); }
 
         /* ===== UTILITIES ===== */
+        .skip-to-content {
+            position: absolute;
+            top: -9999px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warm);
+            color: white;
+            padding: 1rem 2rem;
+            z-index: 10001;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+            outline: none;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -5626,6 +5647,9 @@
 </style>
 </head>
 <body>
+    <!-- Skip to Content Link -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
     <!-- Reading Progress -->
     <div class="reading-progress" id="readingProgress"></div>
 
