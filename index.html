@@ -76,6 +76,29 @@
     <!-- DOMPurify for XSS protection when rendering dynamic HTML content -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H+rglffZ6f5gF7UJgvH4Naa+fGCgjrHKMgoFOGmcPjXM9MaZUs0xkPNOtYPmjAAXmbTmhGaGw7ez8YBbISjdMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
+        /* Skip to Content Link (Accessibility) */
+        .skip-to-content {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            z-index: 10001; /* Above header */
+            background: var(--warm);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 8px 0;
+            transition: top 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+            left: 0;
+            outline: 3px solid var(--primary);
+            outline-offset: -3px;
+        }
+
         /* ===== CSS CUSTOM PROPERTIES ===== */
         :root {
             /* Brand Colors */
@@ -5626,6 +5649,9 @@
 </style>
 </head>
 <body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
     <!-- Reading Progress -->
     <div class="reading-progress" id="readingProgress"></div>
 
