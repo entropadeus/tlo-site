@@ -331,6 +331,30 @@
         .leading-relaxed { line-height: var(--leading-relaxed); }
         .leading-loose { line-height: var(--leading-loose); }
 
+        /* ===== ACCESSIBILITY ===== */
+        .skip-link {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 1rem 1.5rem;
+            background: var(--primary); /* High contrast (15.36:1) */
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            z-index: 10001;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            border-radius: 0 0 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 2px solid var(--warm); /* Added visibility */
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+            outline: 3px solid var(--warm);
+            outline-offset: -3px;
+        }
+
         /* ===== UTILITIES ===== */
         .container {
             max-width: 1200px;
@@ -5626,6 +5650,9 @@
 </style>
 </head>
 <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Reading Progress -->
     <div class="reading-progress" id="readingProgress"></div>
 
