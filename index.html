@@ -153,6 +153,28 @@
             box-sizing: border-box;
         }
 
+        /* Accessibility Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -9999px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            z-index: 2001; /* Above header (1000) and overlays */
+            border-radius: 0 0 8px 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: top 0.3s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: 3px solid var(--warm);
+        }
+
         html {
             scroll-behavior: smooth;
             font-size: 16px;
@@ -5626,6 +5648,9 @@
 </style>
 </head>
 <body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Reading Progress -->
     <div class="reading-progress" id="readingProgress"></div>
 
