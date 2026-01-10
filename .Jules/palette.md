@@ -1,0 +1,3 @@
+## 2024-05-23 - Accessibility: Focus Management and Smooth Scroll
+**Learning:** Custom smooth scroll implementations often hijack navigation events for anchor links, preventing the browser's native focus management. This is detrimental for accessibility features like "Skip to Content" links, which rely on the browser moving focus to the target element.
+**Action:** When implementing smooth scrolling, always exclude accessibility links (e.g., `:not(.skip-link)`) or manually ensure focus is moved to the target element (using `.focus()` and potentially `tabindex="-1"`) after the scroll animation completes.
