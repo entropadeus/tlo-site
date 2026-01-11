@@ -2371,6 +2371,25 @@ body.menu-open .scroll-to-top {
    UTILITIES
    ========================================================================== */
 
+.skip-link {
+    position: absolute;
+    top: -200px;
+    left: 0;
+    z-index: 2000;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.3s;
+    border-radius: 0 0 var(--radius-md) 0;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--color-primary);
+}
+
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
