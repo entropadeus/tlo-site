@@ -53,6 +53,8 @@
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress">
         <div class="scroll-progress__bar"></div>
@@ -97,6 +99,7 @@
     <!-- Mobile Nav Backdrop -->
     <div class="nav-backdrop" id="nav-backdrop"></div>
 
+    <main id="main-content" tabindex="-1">
     <!-- Hero Section -->
     <section class="hero">
         <!-- Background -->
@@ -606,6 +609,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -793,7 +797,7 @@
             // --------------------------------
             // Smooth Scroll for Anchor Links
             // --------------------------------
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            document.querySelectorAll('a[href^="#"]:not(.skip-link)').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
