@@ -208,6 +208,33 @@ body.menu-open {
 }
 
 /* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+.skip-link {
+    position: fixed;
+    top: var(--space-4);
+    left: var(--space-4);
+    z-index: 2005; /* Above modal (2000) and header (1000) */
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-surface-elevated);
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-xl);
+    border: 2px solid var(--color-accent);
+    transform: translateY(-200%);
+    transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+    outline: none;
+}
+
+/* ==========================================================================
    TYPOGRAPHY
    ========================================================================== */
 
