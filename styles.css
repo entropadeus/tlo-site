@@ -207,6 +207,34 @@ body.menu-open {
     outline: none;
 }
 
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -9999px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    padding: var(--space-3) var(--space-6);
+    z-index: 10000;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-decoration: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    transition: top var(--duration-fast) var(--ease-out);
+    box-shadow: var(--shadow-lg);
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+}
+
+#main-content:focus {
+    outline: none;
+}
+
 /* ==========================================================================
    TYPOGRAPHY
    ========================================================================== */
