@@ -420,6 +420,27 @@ section {
    HEADER & NAVIGATION
    ========================================================================== */
 
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -9999px;
+    left: 1rem;
+    z-index: 2100; /* Highest priority */
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+}
+
+.skip-link:focus {
+    top: 1rem;
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
 .header {
     position: fixed;
     top: 0;
