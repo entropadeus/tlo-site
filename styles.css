@@ -207,6 +207,28 @@ body.menu-open {
     outline: none;
 }
 
+/* Skip to content link */
+.skip-link {
+    position: absolute;
+    top: -9999px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    padding: var(--space-3) var(--space-6);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    z-index: 2000;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top var(--duration-fast) var(--ease-out);
+    box-shadow: var(--shadow-lg);
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--color-primary);
+}
+
 /* ==========================================================================
    TYPOGRAPHY
    ========================================================================== */
