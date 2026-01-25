@@ -191,6 +191,29 @@ body.menu-open {
     height: 100%;
 }
 
+/* Skip Link */
+.skip-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    z-index: 2001;
+    transform: translateY(-100%);
+    transition: transform var(--duration-fast) var(--ease-out);
+    text-decoration: none;
+    border-radius: 0 0 var(--radius-md) 0;
+    box-shadow: var(--shadow-md);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+}
+
 /* Selection styling */
 ::selection {
     background: var(--color-accent);
