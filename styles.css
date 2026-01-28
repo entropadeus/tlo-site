@@ -208,6 +208,35 @@ body.menu-open {
 }
 
 /* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+.skip-link {
+    position: absolute;
+    top: -9999px;
+    left: var(--space-4);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    padding: var(--space-4) var(--space-6);
+    z-index: 2000;
+    font-weight: 600;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    text-decoration: none;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+}
+
+#main-content:focus {
+    outline: none;
+}
+
+/* ==========================================================================
    TYPOGRAPHY
    ========================================================================== */
 
