@@ -2435,3 +2435,27 @@ img {
         page-break-inside: avoid;
     }
 }
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+.skip-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-100%);
+    transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+}
