@@ -512,6 +512,30 @@ section {
     transform: scaleX(1);
 }
 
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -9999px;
+    left: var(--space-4);
+    z-index: 2000;
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+    transition: top 0.2s ease-out;
+}
+
+.skip-link:focus {
+    top: var(--space-4);
+    outline: none;
+}
+
+#main-content:focus {
+    outline: none;
+}
+
 /* Header CTA */
 .header__cta {
     display: flex;
