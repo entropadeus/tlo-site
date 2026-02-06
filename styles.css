@@ -2403,3 +2403,30 @@ img {
         page-break-inside: avoid;
     }
 }
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    z-index: 2000;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transform: translateY(-200%);
+    transition: transform var(--duration-fast) var(--ease-out);
+    box-shadow: var(--shadow-lg);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
