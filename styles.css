@@ -512,7 +512,7 @@ section {
 
 /* Header CTA */
 .header__cta {
-    display: flex;
+    display: none;
     align-items: center;
     gap: var(--space-6);
 }
@@ -710,6 +710,7 @@ section {
     }
 
     .header__cta {
+        display: flex;
         position: relative;
         z-index: 1002;
         width: 44px;
